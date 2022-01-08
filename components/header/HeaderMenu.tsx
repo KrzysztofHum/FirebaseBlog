@@ -12,6 +12,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import HeaderExpand from "./HeaderExpand";
 import { ListItem, ListItemText } from "@mui/material";
+import HeaderMenuItems from "./HeaderMenuItems";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -78,11 +79,7 @@ const HeaderMenu = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <HeaderMenuItems />
             </Menu>
           </Box>
           <Typography
@@ -94,15 +91,7 @@ const HeaderMenu = () => {
             FitNotes
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <HeaderMenuItems />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

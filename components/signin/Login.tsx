@@ -8,17 +8,25 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { login } from "../../firebase/users";
 
 type Props = {
   onRemindClick(): void;
 };
 
 const Login = ({ onRemindClick }: Props) => {
-  const [email, setEmail] = useState("test@wp.pl");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
+
   const handleLoginClick = () => {
-    console.log("login");
+    login({ email, password })
+      .then(() => {
+        console.log("login user");
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
   return (
     <div>
@@ -34,6 +42,7 @@ const Login = ({ onRemindClick }: Props) => {
       />
       <Input
         name="password"
+        type="password"
         placeholder="password"
         onChange={({ currentTarget: { value } }) => setPassword(value)}
         value={password}

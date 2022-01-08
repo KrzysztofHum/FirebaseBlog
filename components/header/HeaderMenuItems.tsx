@@ -26,8 +26,8 @@ ListItem.defaultProps = {
 const HeaderMenuItems = () => {
   return (
     <>
-      <ListItem href="/training" label="training" />
-      <ListItem href="/diet" label="diet" />
+      <ListItem href="/training" label="TRAINING" />
+      <ListItem href="/diet" label="DIET" />
     </>
   );
 };

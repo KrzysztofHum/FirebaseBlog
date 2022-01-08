@@ -6,7 +6,7 @@ import Register from "./Register";
 import { Remind } from "./Remind";
 
 export const ActiveForm = () => {
-  const [currentForm, setCurrentForm] = useState("REMIND");
+  const [currentForm, setCurrentForm] = useState("REGISTER");
 
   if (currentForm === "REMIND") {
     return (

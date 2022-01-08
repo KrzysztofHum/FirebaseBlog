@@ -1,14 +1,21 @@
 import { Button, Input, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { register } from "../../firebase/users";
 
 const Register = () => {
-  const [fullName, setFullName] = useState("name");
-  const [email, setEmail] = useState("test@wp.pl");
-  const [password, setPassword] = useState("123123");
-  const [confirmPassword, setConfirmPassword] = useState("123123");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegisterClick = () => {
-    console.log("register");
+    register({ fullName, email, password, confirmPassword })
+      .then(() => {
+        console.log("succcessfully");
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
   return (
     <div>
