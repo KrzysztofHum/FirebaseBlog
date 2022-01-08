@@ -1,3 +1,4 @@
+import { useUser } from "../../context/UserProvider";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import React, { useState } from "react";
 import HeaderExpand from "./HeaderExpand";
@@ -20,7 +19,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const HeaderMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const { isLogged } = useUser();
+  console.log(isLogged);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
