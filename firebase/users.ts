@@ -1,9 +1,10 @@
+import { addDoc, collection } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 
 type RegisterProps = {
   email: any;
@@ -27,20 +28,15 @@ export const register = ({
     throw new Error("Passwords don't match");
   }
   return createUserWithEmailAndPassword(auth, email, password).then((res) => {
-    console.log(fullName);
-    // TODO save user data to firebase
-    // const { uid } = res.user;
-    // const data = {
-    //   id: uid,
-    //   email,
-    //   fullName,
-    // };
-    // // const userRef = collection(db, "users");
-    // const userRef = firestore.collection("users");
-    // userRef
-    //   .doc(uid)
-    //   .set(data)
-    //   .then(() => data);
+    const { uid } = res.user;
+    const data = {
+      id: uid,
+      email,
+      fullName,
+    };
+
+    const usersRef = collection(db, "users");
+    addDoc(usersRef, data);
   });
 };
 

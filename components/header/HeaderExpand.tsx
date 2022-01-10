@@ -4,6 +4,7 @@ import { useUser } from "../../context/UserProvider";
 
 const HeaderExpand = () => {
   const { user } = useUser();
+  console.log(user);
 
   return (
     <>
