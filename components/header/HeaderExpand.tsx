@@ -4,12 +4,11 @@ import { useUser } from "../../context/UserProvider";
 
 const HeaderExpand = () => {
   const { user } = useUser();
-  console.log(user);
 
   return (
     <>
       <IconButton>
-        Krzysztof H{user?.uid}
+        {user?.uid}
         {/* <Avatar src={user?.photoURL} /> */}
       </IconButton>
     </>

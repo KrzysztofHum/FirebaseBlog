@@ -1,4 +1,4 @@
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import {
   createContext,
   ReactChild,
@@ -10,6 +10,7 @@ import {
 } from "react";
 import * as users from "../firebase/users";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 type User = {
   uid: string;
@@ -44,10 +45,17 @@ export default function UserProvider({ children }: AuxProps) {
     if (!user?.uid) {
       return;
     }
-  });
+    const docRef = doc(db, "users", user.uid);
+    getDoc(docRef).then((doc) => {
+      const userData = doc.data();
+      console.log(userData);
+      const { uid, fullName, email } = userData;
+      setUser({ uid, fullName, email });
+    });
+  }, [user?.uid]);
 
   const isLogged = !!user;
-  
+
   const login = useCallback(
     (email: string, password: string) => users.login({ email, password }),
     []

@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -30,17 +30,30 @@ export const register = ({
   return createUserWithEmailAndPassword(auth, email, password).then((res) => {
     const { uid } = res.user;
     const data = {
-      id: uid,
+      uid,
       email,
       fullName,
     };
-
-    const usersRef = collection(db, "users");
-    addDoc(usersRef, data);
+    const docRef = doc(db, "users", uid);
+    setDoc(docRef, data);
   });
 };
 
 export const login = ({ email, password }: LoginProps) =>
-  signInWithEmailAndPassword(auth, email, password);
+  signInWithEmailAndPassword(auth, email, password).then((res) => {
+    const { uid } = res.user;
+    const docRef = doc(db, "users", uid);
+
+    getDoc(docRef).then((doc) => {
+      if (!doc.exists) {
+        throw new Error("User does not exist anymore.");
+      }
+      const user = doc.data();
+      return user;
+    });
+    // onSnapshot(docRef, (doc) => {
+    //   console.log(doc.data(), doc.id);
+    // });
+  });
 
 export const logout = () => signOut(auth);
