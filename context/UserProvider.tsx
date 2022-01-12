@@ -35,7 +35,15 @@ type AuxProps = {
 export const UserContext = createContext<Partial<Context>>({});
 
 export default function UserProvider({ children }: AuxProps) {
-  const [user, setUser] = useState<any>({});
+  // const [user, setUser] = useState<any>({});
+  // console.log(user);
+  const [user, setUser] = useState<User>(() => {
+    if (auth.currentUser) {
+      return { ...auth.currentUser };
+    }
+
+    return undefined;
+  });
 
   // onAuthStateChanged(auth, (currentUser) => {
   //   console.log(currentUser);
@@ -48,11 +56,27 @@ export default function UserProvider({ children }: AuxProps) {
     }
     const docRef = doc(db, "users", user.uid);
     getDoc(docRef).then((doc) => {
+      console.log(doc);
       const userData = doc.data();
       const { uid, displayName, email } = userData;
       setUser({ uid, displayName, email });
     });
   }, [user?.uid]);
+
+  useEffect(() => {
+    // Listen authenticated user
+    const unsubscriber = auth.onAuthStateChanged(async (newUser) => {
+      if (newUser) {
+        const { uid, displayName, email } = newUser;
+        setUser({ uid, displayName, email });
+      } else {
+        setUser(null);
+      }
+    });
+
+    // Unsubscribe auth listener on unmount
+    return () => unsubscriber();
+  }, []);
 
   const isLogged = !!user;
 
