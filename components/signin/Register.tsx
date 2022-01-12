@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { register } from "../../firebase/users";
 
 const Register = () => {
-  const [fullName, setFullName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegisterClick = () => {
-    register({ fullName, email, password, confirmPassword })
+    register({ displayName, email, password, confirmPassword })
       .then(() => {
         console.log("succcessfully");
       })
@@ -25,8 +25,8 @@ const Register = () => {
       <Input
         name="full-name"
         placeholder="full name"
-        onChange={({ currentTarget: { value } }) => setFullName(value)}
-        value={fullName}
+        onChange={({ currentTarget: { value } }) => setDisplayName(value)}
+        value={displayName}
         autoComplete="name"
       />
       <Input

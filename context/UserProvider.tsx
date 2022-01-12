@@ -37,9 +37,10 @@ export const UserContext = createContext<Partial<Context>>({});
 export default function UserProvider({ children }: AuxProps) {
   const [user, setUser] = useState<any>({});
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   console.log(currentUser);
+  //   setUser(currentUser);
+  // });
 
   useEffect(() => {
     if (!user?.uid) {
@@ -48,9 +49,8 @@ export default function UserProvider({ children }: AuxProps) {
     const docRef = doc(db, "users", user.uid);
     getDoc(docRef).then((doc) => {
       const userData = doc.data();
-      console.log(userData);
-      const { uid, fullName, email } = userData;
-      setUser({ uid, fullName, email });
+      const { uid, displayName, email } = userData;
+      setUser({ uid, displayName, email });
     });
   }, [user?.uid]);
 

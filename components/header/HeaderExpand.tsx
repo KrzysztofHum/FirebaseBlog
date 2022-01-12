@@ -8,7 +8,7 @@ const HeaderExpand = () => {
   return (
     <>
       <IconButton>
-        {user?.uid}
+        {user?.displayName}
         {/* <Avatar src={user?.photoURL} /> */}
       </IconButton>
     </>

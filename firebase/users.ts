@@ -8,7 +8,7 @@ import { auth, db } from "./firebase";
 
 type RegisterProps = {
   email: any;
-  fullName: any;
+  displayName: any;
   password: any;
   confirmPassword: any;
 };
@@ -20,7 +20,7 @@ type LoginProps = {
 
 export const register = ({
   email,
-  fullName,
+  displayName,
   password,
   confirmPassword,
 }: RegisterProps) => {
@@ -32,7 +32,7 @@ export const register = ({
     const data = {
       uid,
       email,
-      fullName,
+      displayName,
     };
     const docRef = doc(db, "users", uid);
     setDoc(docRef, data);
