@@ -3,7 +3,7 @@ import React from "react";
 import { useUser } from "../../context/UserProvider";
 
 const HeaderExpand = () => {
-  const { user } = useUser();
+  const { user, signOut } = useUser();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -20,20 +20,12 @@ const HeaderExpand = () => {
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={signOut}>Sign out</MenuItem>
       </Menu>
     </>
   );
