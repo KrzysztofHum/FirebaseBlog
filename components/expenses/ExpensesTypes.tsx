@@ -6,10 +6,13 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import AbcIcon from "@mui/icons-material/Abc";
 import FlightIcon from "@mui/icons-material/Flight";
 import {
+  Button,
+  Grid,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  SwipeableDrawer,
 } from "@mui/material";
 import styled from "styled-components";
 
@@ -46,6 +49,10 @@ const types = [
   },
 ];
 
+const StyledGrid = styled(Grid)`
+  min-height: 50vh;
+`;
+
 const StyledList = styled(List)`
   display: flex;
   flex-wrap: wrap;
@@ -57,20 +64,49 @@ const StyledListItem = styled(ListItemButton)`
   flex-direction: column;
 `;
 
-const TypesOfExpenses = () => {
+const ExpensesTypes = ({ open, toggleDrawer }: any) => {
+
   return (
     <>
-      <StyledList>
-        {types.map(({ label, icon, price }) => (
-          <StyledListItem title={label} key={label}>
-            <ListItemText>{label}</ListItemText>
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText>{price}</ListItemText>
-          </StyledListItem>
-        ))}
-      </StyledList>
+      <SwipeableDrawer
+        anchor="bottom"
+        open={open}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+        disableSwipeToOpen={false}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
+        <StyledGrid>
+          <Grid container justifyContent="space-around">
+            <Grid item>
+              <Button>Income</Button>
+            </Grid>
+            <Grid item>
+              <Button>Expense</Button>
+            </Grid>
+          </Grid>
+          <Grid>
+            <StyledList>
+              {types.map(({ label, icon, price }) => (
+                <StyledListItem
+                  title={label}
+                  key={label}
+                  onClick={toggleDrawer(false)}
+                >
+                  <ListItemText>{label}</ListItemText>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText>{price}</ListItemText>
+                </StyledListItem>
+              ))}
+            </StyledList>
+          </Grid>
+          <Grid>Bot</Grid>
+        </StyledGrid>
+      </SwipeableDrawer>
     </>
   );
 };
 
-export default TypesOfExpenses;
+export default ExpensesTypes;
