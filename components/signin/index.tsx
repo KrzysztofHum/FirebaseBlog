@@ -11,8 +11,8 @@ export const SignIn = () => {
       <Typography variant="caption" align="center">
         <div>
           Login provided by &nbsp;
-          <a href="fitnotes.net" target="_blank" rel="noopener noreferrer">
-            fitnotes.net
+          <a href="budgetapp.net" target="_blank" rel="noopener noreferrer">
+            BudgetApp.net
           </a>
           .<br />
         </div>

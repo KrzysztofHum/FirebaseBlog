@@ -20,11 +20,11 @@ const Footer = () => {
         <Grid item>
           @ 2022{" "}
           <a
-            href="https://fitnotes.net"
+            href="https://budgetapp.net"
             target="_blank"
             rel="noopener noreferrer"
           >
-            fitnotes.net
+            BudgetApp.net
           </a>
           ! All rights reserved
         </Grid>
