@@ -7,16 +7,17 @@ import AbcIcon from "@mui/icons-material/Abc";
 import FlightIcon from "@mui/icons-material/Flight";
 import {
   Button,
+  Drawer,
   Grid,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  SwipeableDrawer,
 } from "@mui/material";
 import styled from "styled-components";
+import { useExpenses } from "../../context/ExpensesProvider";
 
-const types = [
+const expensesTypes = [
   {
     label: "foodstuffs",
     icon: <ShoppingBasketIcon color="primary" />,
@@ -64,20 +65,23 @@ const StyledListItem = styled(ListItemButton)`
   flex-direction: column;
 `;
 
-const ExpensesTypes = ({ open, toggleDrawer }: any) => {
+const ExpensesTypes = () => {
+  const { typesDrower, setTypesDrower, setTypes, setCostDrower } =
+    useExpenses();
+
+  const toggleSelectionType = (type: any) => () => {
+    setTypesDrower(false);
+    setTypes(type);
+    setCostDrower(true);
+  };
+
+  const toggleDrower = () => () => {
+    setTypesDrower(false);
+  };
 
   return (
     <>
-      <SwipeableDrawer
-        anchor="bottom"
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
-        disableSwipeToOpen={false}
-        ModalProps={{
-          keepMounted: true,
-        }}
-      >
+      <Drawer anchor="bottom" open={typesDrower} onClose={toggleDrower()}>
         <StyledGrid>
           <Grid container justifyContent="space-around">
             <Grid item>
@@ -89,11 +93,11 @@ const ExpensesTypes = ({ open, toggleDrawer }: any) => {
           </Grid>
           <Grid>
             <StyledList>
-              {types.map(({ label, icon, price }) => (
+              {expensesTypes.map(({ label, icon, price }: any) => (
                 <StyledListItem
                   title={label}
                   key={label}
-                  onClick={toggleDrawer(false)}
+                  onClick={toggleSelectionType(label)}
                 >
                   <ListItemText>{label}</ListItemText>
                   <ListItemIcon>{icon}</ListItemIcon>
@@ -104,7 +108,7 @@ const ExpensesTypes = ({ open, toggleDrawer }: any) => {
           </Grid>
           <Grid>Bot</Grid>
         </StyledGrid>
-      </SwipeableDrawer>
+      </Drawer>
     </>
   );
 };

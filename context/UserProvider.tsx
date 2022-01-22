@@ -9,7 +9,6 @@ import {
   useState,
 } from "react";
 import * as users from "../firebase/users";
-import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 type User = {

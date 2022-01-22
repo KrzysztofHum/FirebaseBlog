@@ -1,24 +1,21 @@
 import React from "react";
-import { Button, Grid, SwipeableDrawer } from "@mui/material";
+import { Button, Drawer, Grid } from "@mui/material";
 import styled from "styled-components";
+import { useExpenses } from "../../context/ExpensesProvider";
 
 const StyledGrid = styled(Grid)`
   min-height: 50vh;
 `;
 
-const ExpenseCost = ({ open, toggleDrawer }: any) => {
+const ExpenseCost = () => {
+  const { costDrower, setCostDrower } = useExpenses();
+
+  const toggleDrower = () => () => {
+    setCostDrower(false);
+  };
   return (
     <>
-      <SwipeableDrawer
-        anchor="bottom"
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
-        disableSwipeToOpen={false}
-        ModalProps={{
-          keepMounted: true,
-        }}
-      >
+      <Drawer anchor="bottom" open={costDrower} onClose={toggleDrower()}>
         <StyledGrid>
           <Grid container justifyContent="space-around">
             <Grid item>
@@ -38,7 +35,7 @@ const ExpenseCost = ({ open, toggleDrawer }: any) => {
           <Grid>Kalkulator</Grid>
           <Grid> Dzisiaj, 22 sty 2022</Grid>
         </StyledGrid>
-      </SwipeableDrawer>
+      </Drawer>
     </>
   );
 };

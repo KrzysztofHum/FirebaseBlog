@@ -7,13 +7,14 @@ import Footer from "../components/Footer";
 import styled from "styled-components";
 import UserProvider from "../context/UserProvider";
 import ComposeProviders from "../utils/ComposeProviders";
+import ExpensesProvider from "../context/ExpensesProvider";
 
 const StyledMain = styled.main`
   min-height: calc(100vh - 160px);
   position: relative;
 `;
 
-const providers = [UserProvider].reverse();
+const providers = [UserProvider, ExpensesProvider].reverse();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

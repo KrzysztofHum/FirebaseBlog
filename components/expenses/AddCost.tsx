@@ -1,32 +1,21 @@
-import { Button, Grid } from "@mui/material";
-import React, { useState } from "react";
+import { Button } from "@mui/material";
+import React from "react";
 import ExpenseCost from "./ExpenseCost";
 import ExpensesTypes from "./ExpensesTypes";
+import { useExpenses } from "../../context/ExpensesProvider";
 
 const AddCost = () => {
-  const [openExpensesTypes, setOpenExpensesTypes] = useState(false);
-
-  const [openExpenseCost, setOpenExpenseCost] = useState(false);
-
-  const toggleExpensesTypes = (newOpen: boolean) => () => {
-    console.log(newOpen);
-    setOpenExpensesTypes(newOpen);
+  const { setTypesDrower } = useExpenses();
+  const toggleDrower = () => () => {
+    setTypesDrower(true);
   };
-
-  const toggleExpenseCost = (newOpen: boolean) => () => {
-    setOpenExpenseCost(newOpen);
-  };
-
   return (
     <>
-      <Button variant="contained" onClick={toggleExpensesTypes(true)}>
+      <Button variant="contained" onClick={toggleDrower()}>
         Add Cost
       </Button>
-      <ExpensesTypes
-        open={openExpensesTypes}
-        toggleDrawer={toggleExpensesTypes}
-      />
-      <ExpenseCost open={openExpenseCost} toggleDrawer={toggleExpenseCost} />
+      <ExpensesTypes />
+      <ExpenseCost />
     </>
   );
 };
