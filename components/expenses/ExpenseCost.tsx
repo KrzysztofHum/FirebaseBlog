@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Drawer, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
@@ -18,6 +18,32 @@ const ExpenseCost = () => {
   const toggleDrower = () => () => {
     setCostDrower(false);
   };
+
+  const [result, setResult] = useState("");
+  const handleClick = (e) => {
+    setResult("");
+    setResult(result.concat(e.target.name));
+  };
+
+  // clear
+  const clear = () => {
+    setResult("");
+  };
+
+  //backSpace
+  const backSpace = () => {
+    setResult(result.slice(0, -1));
+  };
+
+  //calculate
+  const calc = () => {
+    try {
+      setResult(Number(eval(result).toString()).toFixed(1));
+    } catch (error) {
+      setResult("invalid format");
+    }
+  };
+
   return (
     <>
       <Drawer anchor="bottom" open={costDrower} onClose={toggleDrower()}>
@@ -36,69 +62,99 @@ const ExpenseCost = () => {
             </Grid>
           </Grid>
           <Grid container direction="column" alignItems="center">
-            <span>Wydatek</span>
-            <Typography variant="h6">0 zł</Typography>
+            <span>Cost</span>
+            <Typography variant="h6">{result} zł</Typography>
           </Grid>
           <Grid container direction="column" alignItems="center">
-            <span>Notatki...</span>
+            <span>Notes...</span>
           </Grid>
           <Grid container>
             <Grid item xs={3}>
-              <Button>7</Button>
+              <Button onClick={handleClick} name="7">
+                7
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>8</Button>
+              <Button onClick={handleClick} name="8">
+                8
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>9</Button>
+              <Button onClick={handleClick} name="9">
+                9
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>DELETE</Button>
+              <Button onClick={clear}>DELETE</Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>4</Button>
+              <Button onClick={handleClick} name="4">
+                4
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>5</Button>
+              <Button onClick={handleClick} name="5">
+                5
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>6</Button>
+              <Button onClick={handleClick} name="6">
+                6
+              </Button>
             </Grid>
             <Grid item xs={3}>
               <Button>DATA</Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>1</Button>
+              <Button onClick={handleClick} name="1">
+                1
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>2</Button>
+              <Button onClick={handleClick} name="2">
+                2
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>3</Button>
+              <Button onClick={handleClick} name="3">
+                3
+              </Button>
             </Grid>
             <Grid item xs={3}>
               <Button>zł</Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>+</Button>
+              <Button onClick={handleClick} name="+">
+                +
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>-</Button>
+              <Button onClick={handleClick} name="-">
+                -
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>0</Button>
+              <Button onClick={handleClick} name="0">
+                0
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>,</Button>
+              <Button onClick={handleClick} name=",">
+                ,
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>/</Button>
+              <Button onClick={handleClick} name="/">
+                /
+              </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button>*</Button>
+              <Button onClick={handleClick} name="*">
+                *
+              </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button>Confirm</Button>
+              <Button onClick={calc}>Confirm</Button>
             </Grid>
           </Grid>
           <StyledTypographyFooter>Sobota, 22 sty 2022</StyledTypographyFooter>
