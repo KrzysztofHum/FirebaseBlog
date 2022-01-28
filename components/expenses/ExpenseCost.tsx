@@ -8,9 +8,36 @@ const StyledGrid = styled(Grid)`
 `;
 
 const StyledTypographyFooter = styled(Typography)`
-  background-color: #e6e4e4;
+  background-color: #dddcdc;
   text-align: center;
 `;
+
+const StyledGridNotes = styled(Grid)`
+  border-top: solid 0.1px #eeeeee;
+  padding: 1rem;
+`;
+
+const StyledGridBtn = styled(Grid)`
+  display: flex;
+  min-height: 20vw;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1px #dddcdc;
+`;
+
+const StyledGridConfirm = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 0.1px #dddcdc;
+`;
+
+const btnValues = [
+  [7, 8, 9, "DELETE"],
+  [4, 5, 6, "DATA"],
+  [1, 2, 3, "ZŁ"],
+  [0, ","],
+];
 
 const ExpenseCost = () => {
   const { costDrower, setCostDrower } = useExpenses();
@@ -20,28 +47,15 @@ const ExpenseCost = () => {
   };
 
   const [result, setResult] = useState("");
-  const handleClick = (e) => {
-    setResult("");
-    setResult(result.concat(e.target.name));
-  };
 
-  // clear
-  const clear = () => {
+  const handleClick = (e: any) => {
     setResult("");
+    setResult(result.concat(e));
   };
 
   //backSpace
   const backSpace = () => {
     setResult(result.slice(0, -1));
-  };
-
-  //calculate
-  const calc = () => {
-    try {
-      setResult(Number(eval(result).toString()).toFixed(1));
-    } catch (error) {
-      setResult("invalid format");
-    }
   };
 
   return (
@@ -65,97 +79,55 @@ const ExpenseCost = () => {
             <span>Cost</span>
             <Typography variant="h6">{result} zł</Typography>
           </Grid>
-          <Grid container direction="column" alignItems="center">
+          <StyledGridNotes container direction="column" alignItems="center">
             <span>Notes...</span>
-          </Grid>
+          </StyledGridNotes>
           <Grid container>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="7">
-                7
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="8">
-                8
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="9">
-                9
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={clear}>DELETE</Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="4">
-                4
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="5">
-                5
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="6">
-                6
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button>DATA</Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="1">
-                1
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="2">
-                2
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="3">
-                3
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button>zł</Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="+">
-                +
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="-">
-                -
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="0">
-                0
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name=",">
-                ,
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="/">
-                /
-              </Button>
-            </Grid>
-            <Grid item xs={3}>
-              <Button onClick={handleClick} name="*">
-                *
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button onClick={calc}>Confirm</Button>
-            </Grid>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(7)}>{7}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(8)}>{8}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(9)}>{9}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => backSpace()}>{"DELETE"}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(4)}>{4}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(5)}>{5}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(6)}>{6}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button>{"DATA"}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(1)}>{1}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(2)}>{2}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(3)}>{3}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button>{"ZŁ"}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(0)}>{0}</Button>
+            </StyledGridBtn>
+            <StyledGridBtn item xs={3}>
+              <Button onClick={() => handleClick(",")}>{","}</Button>
+            </StyledGridBtn>
+            <StyledGridConfirm item xs={6}>
+              <Button>CONFIRM</Button>
+            </StyledGridConfirm>
           </Grid>
           <StyledTypographyFooter>Sobota, 22 sty 2022</StyledTypographyFooter>
         </StyledGrid>
