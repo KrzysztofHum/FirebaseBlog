@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Drawer, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
+import { addCost } from "../../firebase/costs";
 
 const StyledGrid = styled(Grid)`
   min-height: 50vh;
@@ -40,22 +41,32 @@ const btnValues = [
 ];
 
 const ExpenseCost = () => {
-  const { costDrower, setCostDrower } = useExpenses();
+  const { costDrower, setCostDrower, types } = useExpenses();
 
   const toggleDrower = () => () => {
     setCostDrower(false);
   };
 
-  const [result, setResult] = useState("");
+  const [cost, setCost] = useState("");
 
   const handleClick = (e: any) => {
-    setResult("");
-    setResult(result.concat(e));
+    setCost("");
+    setCost(cost.concat(e));
   };
 
   //backSpace
   const backSpace = () => {
-    setResult(result.slice(0, -1));
+    setCost(cost.slice(0, -1));
+  };
+
+  const handleAddCost = () => {
+    addCost({ types, cost })
+      // .then(() => {
+      //   console.log("succcessfully");
+      // })
+      // .catch((e) => {
+      //   console.log(e.message);
+      // });
   };
 
   return (
@@ -70,14 +81,14 @@ const ExpenseCost = () => {
               <Button>
                 <Grid>
                   <span>To category</span>
-                  <Typography>foodstoofs</Typography>
+                  <Typography>{types}</Typography>
                 </Grid>
               </Button>
             </Grid>
           </Grid>
           <Grid container direction="column" alignItems="center">
             <span>Cost</span>
-            <Typography variant="h6">{result} zł</Typography>
+            <Typography variant="h6">{cost} zł</Typography>
           </Grid>
           <StyledGridNotes container direction="column" alignItems="center">
             <span>Notes...</span>
@@ -126,7 +137,7 @@ const ExpenseCost = () => {
               <Button onClick={() => handleClick(",")}>{","}</Button>
             </StyledGridBtn>
             <StyledGridConfirm item xs={6}>
-              <Button>CONFIRM</Button>
+              <Button onClick={() => handleAddCost()}>CONFIRM</Button>
             </StyledGridConfirm>
           </Grid>
           <StyledTypographyFooter>Sobota, 22 sty 2022</StyledTypographyFooter>
