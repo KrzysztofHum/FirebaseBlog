@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Drawer, Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
+import { useUser } from "../../context/UserProvider";
 import { addCost } from "../../firebase/costs";
 
 const StyledGrid = styled(Grid)`
@@ -42,12 +43,16 @@ const btnValues = [
 
 const ExpenseCost = () => {
   const { costDrower, setCostDrower, types } = useExpenses();
+  const {
+    user: { uid },
+  } = useUser();
+
+  const [cost, setCost] = useState("");
 
   const toggleDrower = () => () => {
     setCostDrower(false);
+    setCost("");
   };
-
-  const [cost, setCost] = useState("");
 
   const handleClick = (e: any) => {
     setCost("");
@@ -60,13 +65,9 @@ const ExpenseCost = () => {
   };
 
   const handleAddCost = () => {
-    addCost({ types, cost })
-      // .then(() => {
-      //   console.log("succcessfully");
-      // })
-      // .catch((e) => {
-      //   console.log(e.message);
-      // });
+    addCost({ types, cost, uid });
+    setCost("");
+    setCostDrower(false);
   };
 
   return (
