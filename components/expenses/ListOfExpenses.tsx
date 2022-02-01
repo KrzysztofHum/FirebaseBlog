@@ -20,7 +20,8 @@ type ICosts = {
 };
 
 const ListOfExpenses = () => {
-  const { costs, setCosts, costDrower } = useExpenses();
+  const { costDrower } = useExpenses();
+  const [costs, setCosts] = useState([]);
 
   useEffect(() => {
     const costsRef = collection(db, "costs");
@@ -35,7 +36,7 @@ const ListOfExpenses = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setCosts, costDrower]);
+  }, [costDrower]);
   return (
     <>
       <Typography>List of Expenses</Typography>
