@@ -1,4 +1,4 @@
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 
 type AddCostProps = {
@@ -12,6 +12,7 @@ export const addCost = ({ types, cost, uid }: AddCostProps) => {
     cost,
     types,
     uid,
+    createdAt: serverTimestamp(),
   };
   // const docRef = doc(db, "costs", "id");
   const newCostRef = doc(collection(db, "costs"));
