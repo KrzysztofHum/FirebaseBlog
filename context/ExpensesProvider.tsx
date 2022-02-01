@@ -27,6 +27,7 @@ export default function ExpensesProvider({ children }: AuxProps) {
   const [typesDrower, setTypesDrower] = useState(false);
   const [costDrower, setCostDrower] = useState(false);
   const [types, setTypes] = useState("");
+  const [costs, setCosts] = useState([]);
 
   return (
     <ExpensesContext.Provider
@@ -37,6 +38,8 @@ export default function ExpensesProvider({ children }: AuxProps) {
         setCostDrower,
         types,
         setTypes,
+        costs,
+        setCosts,
       }}
     >
       {children}

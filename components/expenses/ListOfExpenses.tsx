@@ -8,6 +8,7 @@ import {
   ListItemButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useExpenses } from "../../context/ExpensesProvider";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
@@ -19,7 +20,7 @@ type ICosts = {
 };
 
 const ListOfExpenses = () => {
-  const [costs, setCosts] = useState([]);
+  const { costs, setCosts, costDrower } = useExpenses();
 
   useEffect(() => {
     const costsRef = collection(db, "costs");
@@ -34,7 +35,7 @@ const ListOfExpenses = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [setCosts, costDrower]);
   return (
     <>
       <Typography>List of Expenses</Typography>
@@ -44,7 +45,9 @@ const ListOfExpenses = () => {
             return (
               <ListItem key={item.id}>
                 <ListItemText>
-                  {new Date(item.createdAt.seconds * 1000).toDateString()}
+                  {item.createdAt === null
+                    ? new Date().toDateString()
+                    : new Date(item.createdAt.seconds * 1000).toDateString()}
                 </ListItemText>
                 <ListItemText>{item.types}</ListItemText>
                 <ListItemText>{item.cost} zł</ListItemText>
