@@ -13,6 +13,8 @@ type Context = {
   setCostDrower: any;
   types: any;
   setTypes: any;
+  costs: any;
+  setCosts: any;
 };
 
 type AuxProps = {
@@ -25,7 +27,7 @@ export default function ExpensesProvider({ children }: AuxProps) {
   const [typesDrower, setTypesDrower] = useState(false);
   const [costDrower, setCostDrower] = useState(false);
   const [types, setTypes] = useState("");
-  console.log(typesDrower);
+
   return (
     <ExpensesContext.Provider
       value={{

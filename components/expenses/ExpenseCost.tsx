@@ -43,9 +43,8 @@ const btnValues = [
 
 const ExpenseCost = () => {
   const { costDrower, setCostDrower, types } = useExpenses();
-  const {
-    user: { uid },
-  } = useUser();
+  const { user } = useUser();
+  const uid = user?.uid;
 
   const [cost, setCost] = useState("");
 
