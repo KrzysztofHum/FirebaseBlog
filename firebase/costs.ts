@@ -4,6 +4,7 @@ import {
   setDoc,
   serverTimestamp,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -38,4 +39,10 @@ export const fetchCosts = () => {
     .catch((err) => {
       console.log(err.message);
     });
+};
+
+export const deleteCosts = (id) => {
+  // const costsRef = collection(db, "costs", id);
+  // deleteDoc(costsRef);
+  deleteDoc(doc(db, "costs", id));
 };

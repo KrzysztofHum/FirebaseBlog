@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useExpenses } from "../../context/ExpensesProvider";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
+import { deleteCosts } from "../../firebase/costs";
 
 type ICosts = {
   id: any;
@@ -20,8 +21,12 @@ type ICosts = {
 };
 
 const ListOfExpenses = () => {
-  const { costDrower } = useExpenses();
-  const [costs, setCosts] = useState([]);
+  const { costs, setCosts, costDrower } = useExpenses();
+
+  //TODO add total Cost in Number not String
+  // let totalCost = costs.reduce(function (acc, item) {
+  //   return acc + item.cost;
+  // }, 0);
 
   useEffect(() => {
     const costsRef = collection(db, "costs");
@@ -36,7 +41,12 @@ const ListOfExpenses = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [costDrower]);
+  }, [setCosts, costDrower]);
+
+  const handleDeleteCost = (id: any) => {
+    deleteCosts(id);
+    setCosts((costs: any) => costs.filter((todo: any) => todo.id !== id));
+  };
   return (
     <>
       <Typography>List of Expenses</Typography>
@@ -53,7 +63,7 @@ const ListOfExpenses = () => {
                 <ListItemText>{item.types}</ListItemText>
                 <ListItemText>{item.cost} zł</ListItemText>
                 <ListItemButton>
-                  <DeleteIcon />
+                  <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
                 </ListItemButton>
               </ListItem>
             );
