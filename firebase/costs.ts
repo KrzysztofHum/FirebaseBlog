@@ -10,13 +10,13 @@ import { db } from "./firebase";
 
 type AddCostProps = {
   types: String;
-  cost: any;
+  costNumber: Number;
   uid: any;
 };
 
-export const addCost = ({ types, cost, uid }: AddCostProps) => {
+export const addCost = ({ types, costNumber, uid }: AddCostProps) => {
   const data = {
-    cost,
+    cost: costNumber,
     types,
     uid,
     createdAt: serverTimestamp(),

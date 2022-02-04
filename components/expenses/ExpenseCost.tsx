@@ -64,7 +64,8 @@ const ExpenseCost = () => {
   };
 
   const handleAddCost = () => {
-    addCost({ types, cost, uid });
+    const costNumber = parseInt(cost);
+    addCost({ types, costNumber, uid });
     setCost("");
     setCostDrower(false);
   };

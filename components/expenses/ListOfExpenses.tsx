@@ -23,10 +23,11 @@ type ICosts = {
 const ListOfExpenses = () => {
   const { costs, setCosts, costDrower } = useExpenses();
 
-  //TODO add total Cost in Number not String
-  // let totalCost = costs.reduce(function (acc, item) {
-  //   return acc + item.cost;
-  // }, 0);
+  let totalCost = costs.reduce(function (acc, item) {
+    console.log(acc);
+    console.log(item);
+    return acc + item.cost;
+  }, 0);
 
   useEffect(() => {
     const costsRef = collection(db, "costs");
@@ -49,7 +50,7 @@ const ListOfExpenses = () => {
   };
   return (
     <>
-      <Typography>List of Expenses</Typography>
+      <Typography>List of Expenses {totalCost} zł</Typography>
       <Box>
         <List>
           {costs.map((item: ICosts) => {
