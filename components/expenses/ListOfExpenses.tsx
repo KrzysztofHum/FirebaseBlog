@@ -24,8 +24,6 @@ const ListOfExpenses = () => {
   const { costs, setCosts, costDrower } = useExpenses();
 
   let totalCost = costs.reduce(function (acc, item) {
-    console.log(acc);
-    console.log(item);
     return acc + item.cost;
   }, 0);
 
@@ -50,7 +48,7 @@ const ListOfExpenses = () => {
   };
   return (
     <>
-      <Typography>List of Expenses {totalCost} zł</Typography>
+      <Typography>List of Expenses ({totalCost} zł)</Typography>
       <Box>
         <List>
           {costs.map((item: ICosts) => {
