@@ -21,7 +21,6 @@ const StyledGridNotes = styled(Grid)`
 
 const StyledGridBtn = styled(Grid)`
   display: flex;
-  min-height: 20vw;
   align-items: center;
   justify-content: center;
   border: solid 0.1px #dddcdc;

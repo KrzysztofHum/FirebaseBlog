@@ -8,6 +8,7 @@ import styled from "styled-components";
 import UserProvider from "../context/UserProvider";
 import ComposeProviders from "../utils/ComposeProviders";
 import ExpensesProvider from "../context/ExpensesProvider";
+import "../styles/styles.css";
 
 const StyledMain = styled.main`
   min-height: calc(100vh - 160px);

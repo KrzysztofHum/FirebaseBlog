@@ -40,16 +40,7 @@ const HeaderMenu = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-          >
-            BudgetApp
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -75,7 +66,7 @@ const HeaderMenu = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", md: "block" },
               }}
             >
               <HeaderMenuItems />
@@ -85,13 +76,21 @@ const HeaderMenu = () => {
             variant="h6"
             noWrap
             component="div"
+            sx={{ mr: 2, display: { xs: "flex", md: "flex" } }}
+          >
+            BudgetApp
+          </Typography>
+          {/* <Typography
+            variant="h6"
+            noWrap
+            component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
             BudgetApp
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <HeaderMenuItems />
-          </Box>
+          </Box> */}
 
           <Box sx={{ flexGrow: 0 }}>
             {isLogged ? (

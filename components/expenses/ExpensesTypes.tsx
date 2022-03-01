@@ -13,6 +13,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  SwipeableDrawer,
 } from "@mui/material";
 import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
@@ -49,6 +50,7 @@ import { useExpenses } from "../../context/ExpensesProvider";
 //     price: "44 zł",
 //   },
 // ];
+
 
 const StyledGrid = styled(Grid)`
   min-height: 50vh;
