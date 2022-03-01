@@ -76,8 +76,6 @@ const ExpensesTypes = () => {
     return acc;
   }, {});
 
-  console.log(result);
-
   const toggleSelectionType = (type: any) => () => {
     setTypesDrower(false);
     setTypes(type);
