@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useExpenses } from "../../context/ExpensesProvider";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { deleteCosts } from "../../firebase/costs";
+import { useUser } from "../../context/UserProvider";
 
 type ICosts = {
   id: any;
@@ -22,13 +23,15 @@ type ICosts = {
 
 const ListOfExpenses = () => {
   const { costs, setCosts, costDrower } = useExpenses();
+  const { user } = useUser();
+  const uid = user?.uid;
 
   let totalCost = costs.reduce(function (acc, item) {
     return acc + item.cost;
   }, 0);
 
   useEffect(() => {
-    const costsRef = collection(db, "costs");
+    const costsRef = query(collection(db, "costs"), where("uid", "==", uid));
     getDocs(costsRef)
       .then((snapshot) => {
         let costs: any = [];
