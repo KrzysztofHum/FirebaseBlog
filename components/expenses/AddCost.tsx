@@ -1,10 +1,9 @@
-import { Icon, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
 import ExpenseCost from "./ExpenseCost";
 import ExpensesTypes from "./ExpensesTypes";
 import { useExpenses } from "../../context/ExpensesProvider";
 import styled from "styled-components";
-import AddIcon from "@mui/icons-material/Add";
 
 const StyledButton = styled(IconButton)`
   bottom: 100px;

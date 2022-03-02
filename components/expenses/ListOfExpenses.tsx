@@ -31,6 +31,9 @@ const ListOfExpenses = () => {
   }, 0);
 
   useEffect(() => {
+    if (!user?.uid) {
+      return;
+    }
     const costsRef = query(collection(db, "costs"), where("uid", "==", uid));
     getDocs(costsRef)
       .then((snapshot) => {
@@ -43,7 +46,7 @@ const ListOfExpenses = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setCosts, costDrower]);
+  }, [setCosts, costDrower, user, uid]);
 
   const handleDeleteCost = (id: any) => {
     deleteCosts(id);

@@ -55,7 +55,6 @@ export default function UserProvider({ children }: AuxProps) {
     }
     const docRef = doc(db, "users", user.uid);
     getDoc(docRef).then((doc) => {
-      console.log(doc);
       const userData = doc.data();
       const { uid, displayName, email } = userData;
       setUser({ uid, displayName, email });
