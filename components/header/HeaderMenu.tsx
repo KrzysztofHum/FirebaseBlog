@@ -4,13 +4,11 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Link from "next/link";
 import React, { useState } from "react";
-import HeaderExpand from "./HeaderExpand";
-import { ListItem, ListItemText } from "@mui/material";
+import { Drawer, ListItem, ListItemText } from "@mui/material";
 import HeaderMenuItems from "./HeaderMenuItems";
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -18,22 +16,15 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const HeaderMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const { user } = useUser();
   const { isLogged } = useUser();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -51,26 +42,13 @@ const HeaderMenu = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+            <Drawer
+              anchor="top"
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "block" },
-              }}
             >
-              <HeaderMenuItems />
-            </Menu>
+              <HeaderMenuItems handleCloseNavMenu={handleCloseNavMenu} />
+            </Drawer>
           </Box>
           <Typography
             variant="h6"
@@ -80,21 +58,11 @@ const HeaderMenu = () => {
           >
             BudgetApp
           </Typography>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            BudgetApp
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <HeaderMenuItems />
-          </Box> */}
-
           <Box sx={{ flexGrow: 0 }}>
             {isLogged ? (
-              <HeaderExpand />
+              <IconButton onClick={handleOpenNavMenu}>
+                {user?.displayName}
+              </IconButton>
             ) : (
               <Link href="sign-in" passHref>
                 <ListItem button component="a">
