@@ -1,4 +1,4 @@
-import { MenuItem } from "@mui/material";
+import { Avatar, MenuItem, Stack } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import { useUser } from "../../context/UserProvider";
@@ -34,18 +34,21 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
 
   return (
     <>
-      <ListItem
-        href="/"
-        label={user?.displayName}
-        onClick={handleCloseNavMenu}
-      />
-      <ListItem href="/" label="SIGN OUT" onClick={handleSignOut} />
+      <div>
+        <div>
+          <Stack direction="row">
+            <Avatar>H</Avatar>
+          </Stack>
+        </div>
+        <div>{user?.displayName}</div>
+      </div>
       <ListItem
         href="/expenses"
-        label="EXPENSES"
+        label="My Expenses"
         onClick={handleCloseNavMenu}
       />
-      <ListItem href="/" label="INVESTMENTS" onClick={handleCloseNavMenu} />
+      <ListItem href="/" label="My Investments" onClick={handleCloseNavMenu} />
+      <ListItem href="/" label="LOG OUT" onClick={handleSignOut} />
     </>
   );
 };
