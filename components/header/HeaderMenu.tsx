@@ -37,7 +37,7 @@ const HeaderMenu = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
             <IconButton
@@ -85,6 +85,17 @@ const HeaderMenu = () => {
           </Box>
         </Toolbar>
       </Container>
+      <Grid container>
+        <Grid item xs={2}>
+          <div>{"<"}</div>
+        </Grid>
+        <Grid item xs={8}>
+          <div>MARZEC 2022</div>
+        </Grid>
+        <Grid item xs={2}>
+          <div>{">"}</div>
+        </Grid>
+      </Grid>
     </AppBar>
   );
 };

@@ -5,7 +5,7 @@ import HeaderMenu from "./HeaderMenu";
 
 const StyledHeader = styled(Grid)`
   width: 100%;
-  height: 80px;
+  height: 100px;
 `;
 
 const Header = () => {
