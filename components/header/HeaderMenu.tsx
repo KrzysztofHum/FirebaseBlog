@@ -4,15 +4,23 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Drawer, ListItem, ListItemText } from "@mui/material";
 import HeaderMenuItems from "./HeaderMenuItems";
+import styled from "styled-components";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const StyledHamburgerMenu = styled.div`
+  width: 35px;
+  height: 4px;
+  background-color: white;
+  margin: 6px 0;
+`;
 
 const HeaderMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -40,7 +48,11 @@ const HeaderMenu = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <Grid>
+                <StyledHamburgerMenu />
+                <StyledHamburgerMenu />
+                <StyledHamburgerMenu />
+              </Grid>
             </IconButton>
             <Drawer
               anchor="top"
