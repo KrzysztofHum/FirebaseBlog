@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { Drawer, ListItem, ListItemText } from "@mui/material";
 import HeaderMenuItems from "./HeaderMenuItems";
 import styled from "styled-components";
+import HeaderMenuCalendar from "./HeaderMenuCalendar";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -85,17 +86,7 @@ const HeaderMenu = () => {
           </Box>
         </Toolbar>
       </Container>
-      <Grid container>
-        <Grid item xs={2}>
-          <Typography align="center">{"<"}</Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <Typography align="center">MARZEC 2022</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography align="center">{">"}</Typography>
-        </Grid>
-      </Grid>
+      <HeaderMenuCalendar />
     </AppBar>
   );
 };
