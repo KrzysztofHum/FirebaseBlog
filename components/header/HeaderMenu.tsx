@@ -87,13 +87,13 @@ const HeaderMenu = () => {
       </Container>
       <Grid container>
         <Grid item xs={2}>
-          <div>{"<"}</div>
+          <Typography align="center">{"<"}</Typography>
         </Grid>
         <Grid item xs={8}>
-          <div>MARZEC 2022</div>
+          <Typography align="center">MARZEC 2022</Typography>
         </Grid>
         <Grid item xs={2}>
-          <div>{">"}</div>
+          <Typography align="center">{">"}</Typography>
         </Grid>
       </Grid>
     </AppBar>

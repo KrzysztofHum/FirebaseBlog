@@ -11,7 +11,7 @@ import ExpensesProvider from "../context/ExpensesProvider";
 import "../styles/styles.css";
 
 const StyledMain = styled.main`
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 180px);
   position: relative;
 `;
 

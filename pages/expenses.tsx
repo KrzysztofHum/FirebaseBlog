@@ -37,7 +37,7 @@ const StyledGrid = styled(Grid)`
 
 const expenses = () => {
   return (
-    <StyledGrid container spacing={2} direction="column">
+    <StyledGrid container direction="column">
       <Grid item>
         <Typography align="center">My Expenses</Typography>
       </Grid>

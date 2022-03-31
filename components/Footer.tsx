@@ -1,23 +1,18 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import styled from "styled-components";
 import React from "react";
 
 const StyledContainer = styled(Grid)`
-  background-color: black;
+  background-color: #556cd6;
   bottom: 0;
-  text-align: center;
   height: 80px;
 `;
 
 const Footer = () => {
   return (
     <footer>
-      <StyledContainer
-        container
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid item>
+      <StyledContainer container alignItems="center" justifyContent="center">
+        <Typography align="center">
           @ 2022{" "}
           <a
             href="https://budgetapp.net"
@@ -27,7 +22,7 @@ const Footer = () => {
             BudgetApp.net
           </a>
           ! All rights reserved
-        </Grid>
+        </Typography>
       </StyledContainer>
     </footer>
   );
