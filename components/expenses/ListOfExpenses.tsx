@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Typography,
   Box,
@@ -22,7 +22,7 @@ type ICosts = {
 };
 
 const ListOfExpenses = () => {
-  const { costs, setCosts, costDrower } = useExpenses();
+  const { costs, setCosts, costDrower, selectedDate } = useExpenses();
   const { user } = useUser();
   const uid = user?.uid;
 
@@ -46,18 +46,30 @@ const ListOfExpenses = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setCosts, costDrower, user, uid]);
+  }, [setCosts, costDrower, user, uid, costs]);
 
   const handleDeleteCost = (id: any) => {
     deleteCosts(id);
     setCosts((costs: any) => costs.filter((todo: any) => todo.id !== id));
   };
+
+  const month = selectedDate.getMonth();
+  const year = selectedDate.getFullYear();
+  console.log(month);
+  console.log(year);
+  const correctCosts = costs.filter(
+    (todo: any) =>
+      todo.createdAt !== null &&
+      new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
+      new Date(todo.createdAt.seconds * 1000).getMonth() === month
+  );
+
   return (
     <>
       <Typography>List of Expenses ({totalCost} zł)</Typography>
       <Box>
         <List>
-          {costs.map((item: ICosts) => {
+          {correctCosts.map((item: ICosts) => {
             return (
               <ListItem key={item.id}>
                 <ListItemText>

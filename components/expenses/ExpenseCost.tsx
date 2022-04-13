@@ -33,13 +33,6 @@ const StyledGridConfirm = styled(Grid)`
   border: solid 0.1px #dddcdc;
 `;
 
-// const btnValues = [
-//   [7, 8, 9, "DELETE"],
-//   [4, 5, 6, "DATA"],
-//   [1, 2, 3, "ZŁ"],
-//   [0, ","],
-// ];
-
 const ExpenseCost = () => {
   const { costDrower, setCostDrower, types } = useExpenses();
   const { user } = useUser();
