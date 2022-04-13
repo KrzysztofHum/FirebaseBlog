@@ -1,8 +1,8 @@
-import { Grid, Typography } from "@mui/material";
-import React from "react";
+import { Button, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 const HeaderMenuCalendar = () => {
-  const months = [
+  const monthNames = [
     "January",
     "February",
     "March",
@@ -17,16 +17,44 @@ const HeaderMenuCalendar = () => {
     "December",
   ];
 
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(today);
+
+  const getPrevMonth = () => {
+    setSelectedDate(
+      (prevValue) =>
+        new Date(prevValue.getFullYear(), prevValue.getMonth() - 1, 1)
+    );
+  };
+  const getNextMonth = () => {
+    setSelectedDate(
+      (prevValue) =>
+        new Date(prevValue.getFullYear(), prevValue.getMonth() + 1, 1)
+    );
+  };
+
   return (
     <Grid container>
       <Grid item xs={2}>
-        <Typography align="center">{"<"}</Typography>
+        <Button onClick={getPrevMonth}>
+          <Typography color="common.white" align="center">
+            {"<"}
+          </Typography>
+        </Button>
       </Grid>
       <Grid item xs={8}>
-        <Typography align="center">MARZEC 2022</Typography>
+        <Typography align="center">
+          {`${
+            monthNames[selectedDate.getMonth()]
+          } - ${selectedDate.getFullYear()}`}
+        </Typography>
       </Grid>
       <Grid item xs={2}>
-        <Typography align="center">{">"}</Typography>
+        <Button onClick={getNextMonth}>
+          <Typography color="common.white" align="center">
+            {">"}
+          </Typography>
+        </Button>
       </Grid>
     </Grid>
   );
