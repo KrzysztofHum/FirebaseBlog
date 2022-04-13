@@ -15,6 +15,8 @@ type Context = {
   setTypes: any;
   costs: any;
   setCosts: any;
+  selectedDate: any;
+  setSelectedDate: any;
 };
 
 type AuxProps = {
@@ -28,6 +30,8 @@ export default function ExpensesProvider({ children }: AuxProps) {
   const [costDrower, setCostDrower] = useState(false);
   const [types, setTypes] = useState("");
   const [costs, setCosts] = useState([]);
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(today);
 
   return (
     <ExpensesContext.Provider
@@ -40,6 +44,8 @@ export default function ExpensesProvider({ children }: AuxProps) {
         setTypes,
         costs,
         setCosts,
+        selectedDate,
+        setSelectedDate,
       }}
     >
       {children}

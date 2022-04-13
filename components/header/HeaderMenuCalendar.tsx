@@ -1,7 +1,9 @@
 import { Button, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
+import { useExpenses } from "../../context/ExpensesProvider";
 
 const HeaderMenuCalendar = () => {
+  const { selectedDate, setSelectedDate } = useExpenses();
   const monthNames = [
     "January",
     "February",
@@ -17,18 +19,15 @@ const HeaderMenuCalendar = () => {
     "December",
   ];
 
-  const today = new Date();
-  const [selectedDate, setSelectedDate] = useState(today);
-
   const getPrevMonth = () => {
     setSelectedDate(
-      (prevValue) =>
+      (prevValue: any) =>
         new Date(prevValue.getFullYear(), prevValue.getMonth() - 1, 1)
     );
   };
   const getNextMonth = () => {
     setSelectedDate(
-      (prevValue) =>
+      (prevValue: any) =>
         new Date(prevValue.getFullYear(), prevValue.getMonth() + 1, 1)
     );
   };
