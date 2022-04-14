@@ -14,9 +14,9 @@ const StyledButton = styled(IconButton)`
   height: 45px;
   color: white;
   font-size: 2rem;
-  background-color: #556cd6;
+  background-color: ${(props) => props.theme.palette.primary.main};
   &:hover {
-    background-color: #2e4bca;
+    background-color: ${(props) => props.theme.palette.secondary.main};
   }
 `;
 

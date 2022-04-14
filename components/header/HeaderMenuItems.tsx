@@ -1,6 +1,7 @@
 import { Avatar, MenuItem, Stack } from "@mui/material";
 import Link from "next/link";
 import React from "react";
+import styled from "styled-components";
 import { useUser } from "../../context/UserProvider";
 
 type Props = {
@@ -9,6 +10,10 @@ type Props = {
   onClick?: () => void;
   children?: React.ReactNode;
 };
+
+const StyledUserInfo = styled.div`
+  padding-top: 1rem;
+`;
 
 const ListItem = ({ href, label, onClick, children }: Props) => (
   <Link href={href} passHref>
@@ -34,14 +39,14 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
 
   return (
     <>
-      <div>
+      <StyledUserInfo>
         <div>
           <Stack direction="row">
             <Avatar>H</Avatar>
           </Stack>
         </div>
         <div>{user?.displayName}</div>
-      </div>
+      </StyledUserInfo>
       <ListItem
         href="/expenses"
         label="My Expenses"

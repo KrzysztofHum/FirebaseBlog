@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React from "react";
 
 const StyledContainer = styled(Grid)`
-  background-color: #556cd6;
+  background-color: ${(props) => props.theme.palette.primary.main};
   bottom: 0;
   height: 80px;
 `;
