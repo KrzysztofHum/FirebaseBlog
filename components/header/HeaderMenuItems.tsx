@@ -2,6 +2,7 @@ import { Avatar, Grid, MenuItem, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import LanguageIcon from "@mui/icons-material/Language";
 import { useUser } from "../../context/UserProvider";
 
 type Props = {
@@ -20,6 +21,10 @@ const StyledUserInfo = styled.div`
 const StyledAvatar = styled(Avatar)`
   background-color: white;
   color: #acacac;
+`;
+
+const StyledGridBorder = styled(Grid)`
+  border-bottom: #9b9a9a 1px solid;
 `;
 
 const ListItem = ({ href, label, onClick, children }: Props) => (
@@ -74,17 +79,70 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
         </Grid>
       </StyledUserInfo>
       <Grid m={0}>
-        <ListItem
-          href="/expenses"
-          label="My Expenses"
-          onClick={handleCloseNavMenu}
-        />
-        <ListItem
-          href="/"
-          label="My Investments"
-          onClick={handleCloseNavMenu}
-        />
-        <ListItem href="/" label="LOG OUT" onClick={handleSignOut} />
+        <Grid p={2}>
+          <Grid>
+            <Typography>Settings</Typography>
+          </Grid>
+          <Grid
+            direction="row"
+            container
+            alignItems="flex-start"
+            spacing={2}
+            mt={0}
+          >
+            <Grid item xs={2}>
+              <LanguageIcon />
+            </Grid>
+            <StyledGridBorder item xs={10}>
+              <Typography>Language</Typography>
+              <Typography>Default</Typography>
+            </StyledGridBorder>
+          </Grid>
+          <Grid
+            direction="row"
+            container
+            alignItems="flex-start"
+            spacing={2}
+            mt={0}
+          >
+            <Grid item xs={2}>
+              <LanguageIcon />
+            </Grid>
+            <StyledGridBorder item xs={10}>
+              <Typography>Language</Typography>
+              <Typography>Default</Typography>
+            </StyledGridBorder>
+          </Grid>
+          <Grid
+            direction="row"
+            container
+            alignItems="flex-start"
+            spacing={2}
+            mt={0}
+          >
+            <Grid item xs={2}>
+              <LanguageIcon />
+            </Grid>
+            <StyledGridBorder item xs={10}>
+              <Typography>Language</Typography>
+              <Typography>Default</Typography>
+            </StyledGridBorder>
+          </Grid>
+        </Grid>
+
+        <Grid>
+          <ListItem
+            href="/expenses"
+            label="My Expenses"
+            onClick={handleCloseNavMenu}
+          />
+          <ListItem
+            href="/"
+            label="My Investments"
+            onClick={handleCloseNavMenu}
+          />
+          <ListItem href="/" label="LOG OUT" onClick={handleSignOut} />
+        </Grid>
       </Grid>
     </>
   );
