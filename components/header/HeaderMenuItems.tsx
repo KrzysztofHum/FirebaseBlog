@@ -88,12 +88,13 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             container
             alignItems="flex-start"
             spacing={2}
-            mt={0}
+            mt={2}
+            ml={0}
           >
-            <Grid item xs={2}>
+            <Grid xs={1}>
               <LanguageIcon />
             </Grid>
-            <StyledGridBorder item xs={10}>
+            <StyledGridBorder xs={10}>
               <Typography>Language</Typography>
               <Typography>Default</Typography>
             </StyledGridBorder>
@@ -103,12 +104,13 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             container
             alignItems="flex-start"
             spacing={2}
-            mt={0}
+            mt={2}
+            ml={0}
           >
-            <Grid item xs={2}>
+            <Grid xs={1}>
               <LanguageIcon />
             </Grid>
-            <StyledGridBorder item xs={10}>
+            <StyledGridBorder xs={10}>
               <Typography>Language</Typography>
               <Typography>Default</Typography>
             </StyledGridBorder>
@@ -118,12 +120,13 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             container
             alignItems="flex-start"
             spacing={2}
-            mt={0}
+            mt={2}
+            ml={0}
           >
-            <Grid item xs={2}>
+            <Grid xs={1}>
               <LanguageIcon />
             </Grid>
-            <StyledGridBorder item xs={10}>
+            <StyledGridBorder xs={10}>
               <Typography>Language</Typography>
               <Typography>Default</Typography>
             </StyledGridBorder>
