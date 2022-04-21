@@ -13,6 +13,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { deleteCosts } from "../../firebase/costs";
 import { useUser } from "../../context/UserProvider";
+import CategoriesList from "./CategoriesList";
 
 type ICosts = {
   id: any;
@@ -64,31 +65,7 @@ const ListOfExpenses = ({ currentView }: any) => {
       new Date(todo.createdAt.seconds * 1000).getMonth() === month
   );
   if (currentView === "Categories") {
-    return (
-      <>
-        <Typography>List of Expenses ({totalCost} zł)</Typography>
-        <Box>
-          <List>
-            {correctCosts.map((item: ICosts) => {
-              return (
-                <ListItem key={item.id}>
-                  <ListItemText>
-                    {item.createdAt === null
-                      ? new Date().toDateString()
-                      : new Date(item.createdAt.seconds * 1000).toDateString()}
-                  </ListItemText>
-                  <ListItemText>{item.types}</ListItemText>
-                  <ListItemText>{item.cost} zł</ListItemText>
-                  <ListItemButton>
-                    <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        </Box>
-      </>
-    );
+    return <CategoriesList />;
   }
   if (currentView === "Transactions") {
     return (

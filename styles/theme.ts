@@ -8,6 +8,9 @@ const theme = createTheme({
     secondary: {
       main: "#36a77d",
     },
+    disabled: {
+      main: "white",
+    },
   },
 });
 export default theme;
