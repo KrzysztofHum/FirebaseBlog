@@ -8,7 +8,9 @@ import {
 } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import PaletteIcon from "@mui/icons-material/Palette";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -35,6 +37,10 @@ const StyledAvatar = styled(Avatar)`
 
 const StyledGridBorder = styled(Grid)`
   border-bottom: #9b9a9a 1px solid;
+`;
+
+const StyledTypographuText = styled(Typography)`
+  color: #3EB489;
 `;
 
 // const ListItem = ({ href, label, onClick, children }: Props) => (
@@ -91,7 +97,7 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
       <Grid m={0}>
         <Grid>
           <Grid p={2}>
-            <Typography>Options</Typography>
+            <StyledTypographuText>Options</StyledTypographuText>
           </Grid>
           {/* <ListItem
             href="/expenses"
@@ -127,7 +133,7 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
         </Grid>
         <Grid p={2}>
           <Grid>
-            <Typography>Settings</Typography>
+            <StyledTypographuText>Settings</StyledTypographuText>
           </Grid>
           <Grid
             direction="row"
@@ -142,7 +148,7 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             </Grid>
             <StyledGridBorder xs={10}>
               <Typography>Language</Typography>
-              <Typography>English</Typography>
+              <StyledTypographuText>English</StyledTypographuText>
             </StyledGridBorder>
           </Grid>
           <Grid
@@ -154,11 +160,11 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             ml={0}
           >
             <Grid xs={1}>
-              <LanguageIcon />
+              <PaletteIcon />
             </Grid>
             <StyledGridBorder xs={10}>
               <Typography>Theme</Typography>
-              <Typography>Light</Typography>
+              <StyledTypographuText>Light</StyledTypographuText>
             </StyledGridBorder>
           </Grid>
           <Grid
@@ -170,11 +176,11 @@ const HeaderMenuItems = ({ handleCloseNavMenu }: any) => {
             ml={0}
           >
             <Grid xs={1}>
-              <LanguageIcon />
+              <LocalAtmIcon />
             </Grid>
             <StyledGridBorder xs={10}>
               <Typography>Default currency</Typography>
-              <Typography>Polish złoty - zł</Typography>
+              <StyledTypographuText>Polish złoty - zł</StyledTypographuText>
             </StyledGridBorder>
           </Grid>
         </Grid>
