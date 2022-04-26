@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import React from "react";
 import ExpenseCost from "./ExpenseCost";
-import ExpensesTypes from "./ExpensesTypes";
+import ExpensesTypes from "./ExpensesCategories";
 import { useExpenses } from "../../context/ExpensesProvider";
 import styled from "styled-components";
 

@@ -1,4 +1,9 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Grid,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -17,8 +22,15 @@ const StyledContainer = styled.div`
 `;
 
 const StyledCostGrid = styled.div`
+  border: 1rem solid #3eb489;
+  padding: 1.5rem;
+  border-radius: 50%;
   grid-column: 2/4;
   grid-row: 2/4;
+  min-width: 10rem;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledListItem = styled(ListItemButton)`
@@ -39,6 +51,9 @@ const CategoriesList = () => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
     return acc;
   }, {});
+  let totalCost = costs.reduce(function (acc, item) {
+    return acc + item.cost;
+  }, 0);
   return (
     <StyledContainer>
       <StyledListItem title="foodstuffs">
@@ -76,7 +91,10 @@ const CategoriesList = () => {
         </StyledListItemIcon>
         <ListItemText>{result.trips || 0} $</ListItemText>
       </StyledListItem>
-      <StyledCostGrid>Expenses 222 zł</StyledCostGrid>
+      <StyledCostGrid>
+        <Grid>Expenses</Grid>
+        <Grid color="red">{totalCost || 0} $</Grid>
+      </StyledCostGrid>
       <StyledListItem title="another">
         <ListItemText>another</ListItemText>
         <StyledListItemIcon>

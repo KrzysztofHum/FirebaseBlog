@@ -67,7 +67,7 @@ const StyledListItem = styled(ListItemButton)`
   flex-direction: column;
 `;
 
-const ExpensesTypes = () => {
+const ExpensesCategories = () => {
   const { typesDrower, setTypesDrower, setTypes, setCostDrower, costs } =
     useExpenses();
 
@@ -180,4 +180,4 @@ const ExpensesTypes = () => {
   );
 };
 
-export default ExpensesTypes;
+export default ExpensesCategories;
