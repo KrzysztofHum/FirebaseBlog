@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   Typography,
   Box,
@@ -23,13 +23,14 @@ type ICosts = {
 };
 
 const ListOfExpenses = ({ currentView }: any) => {
-  const { costs, setCosts, costDrower, selectedDate } = useExpenses();
+  const { costs, setCosts, selectedDate } = useExpenses();
   const { user } = useUser();
   const uid = user?.uid;
-
   let totalCost = costs.reduce(function (acc, item) {
     return acc + item.cost;
   }, 0);
+
+  console.log(costs);
 
   useEffect(() => {
     if (!user?.uid) {
@@ -47,7 +48,7 @@ const ListOfExpenses = ({ currentView }: any) => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [setCosts, costDrower, user, uid, costs]);
+  }, [setCosts, user, uid]);
 
   const handleDeleteCost = (id: any) => {
     deleteCosts(id);
@@ -56,8 +57,6 @@ const ListOfExpenses = ({ currentView }: any) => {
 
   const month = selectedDate.getMonth();
   const year = selectedDate.getFullYear();
-  console.log(month);
-  console.log(year);
   const correctCosts = costs.filter(
     (todo: any) =>
       todo.createdAt !== null &&

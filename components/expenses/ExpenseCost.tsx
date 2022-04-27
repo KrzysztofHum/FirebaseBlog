@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
 import { useUser } from "../../context/UserProvider";
 import { addCost } from "../../firebase/costs";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
 const StyledGrid = styled(Grid)`
   min-height: 50vh;
@@ -34,7 +36,7 @@ const StyledGridConfirm = styled(Grid)`
 `;
 
 const ExpenseCost = () => {
-  const { costDrower, setCostDrower, types } = useExpenses();
+  const { costDrower, setCostDrower, types, setCosts } = useExpenses();
   const { user } = useUser();
   const uid = user?.uid;
 
@@ -60,6 +62,18 @@ const ExpenseCost = () => {
     addCost({ types, costNumber, uid });
     setCost("");
     setCostDrower(false);
+    const costsRef = query(collection(db, "costs"), where("uid", "==", uid));
+    getDocs(costsRef)
+      .then((snapshot) => {
+        let costs: any = [];
+        snapshot.docs.forEach((doc) => {
+          costs.push({ ...doc.data(), id: doc.id });
+        });
+        setCosts(costs);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
