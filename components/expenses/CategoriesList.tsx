@@ -54,8 +54,7 @@ const CategoriesList = () => {
   let totalCost = costs.reduce(function (acc, item) {
     return acc + item.cost;
   }, 0);
-  console.log(costs);
-  console.log(result);
+
   return (
     <StyledContainer>
       <StyledListItem title="foodstuffs">

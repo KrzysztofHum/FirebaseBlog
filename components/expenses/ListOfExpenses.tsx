@@ -57,12 +57,16 @@ const ListOfExpenses = ({ currentView }: any) => {
 
   const month = selectedDate.getMonth();
   const year = selectedDate.getFullYear();
-  const correctCosts = costs.filter(
-    (todo: any) =>
-      todo.createdAt !== null &&
-      new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
-      new Date(todo.createdAt.seconds * 1000).getMonth() === month
-  );
+  const correctCosts = costs
+    .filter(
+      (todo: any) =>
+        todo.createdAt !== null &&
+        new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
+        new Date(todo.createdAt.seconds * 1000).getMonth() === month
+    )
+    .sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
   if (currentView === "Categories") {
     return <CategoriesList />;
   }
@@ -73,6 +77,7 @@ const ListOfExpenses = ({ currentView }: any) => {
         <Box>
           <List>
             {correctCosts.map((item: ICosts) => {
+              console.log(correctCosts);
               return (
                 <ListItem key={item.id}>
                   <ListItemText>
