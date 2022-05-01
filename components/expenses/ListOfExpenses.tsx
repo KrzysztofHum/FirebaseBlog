@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import {
   Typography,
   Box,
@@ -14,6 +14,7 @@ import { db } from "../../firebase/firebase";
 import { deleteCosts } from "../../firebase/costs";
 import { useUser } from "../../context/UserProvider";
 import CategoriesList from "./CategoriesList";
+import styled from "styled-components";
 
 type ICosts = {
   id: any;
@@ -22,6 +23,14 @@ type ICosts = {
   cost: any;
 };
 
+const StyledListItemDate = styled(ListItem)`
+  border-top: solid 1px #a9a9a9;
+  background-color: #f0f0f0;
+`;
+const StyledListItemExpenses = styled(ListItem)`
+  border-top: solid 1px #a9a9a9;
+`;
+
 const ListOfExpenses = ({ currentView }: any) => {
   const { costs, setCosts, selectedDate } = useExpenses();
   const { user } = useUser();
@@ -29,8 +38,6 @@ const ListOfExpenses = ({ currentView }: any) => {
   let totalCost = costs.reduce(function (acc, item) {
     return acc + item.cost;
   }, 0);
-
-  console.log(costs);
 
   useEffect(() => {
     if (!user?.uid) {
@@ -67,7 +74,6 @@ const ListOfExpenses = ({ currentView }: any) => {
     .sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
-  console.log(correctCosts);
 
   if (currentView === "Categories") {
     return <CategoriesList />;
@@ -82,41 +88,43 @@ const ListOfExpenses = ({ currentView }: any) => {
             {correctCosts.map((item: ICosts) => {
               let itemData = "";
 
-              if (item.createdAt === null) {
+              if (
+                item.createdAt === null &&
+                new Date().getMonth() === month &&
+                new Date().getFullYear === year
+              ) {
                 itemData = new Date().toDateString();
-              } else {
+              } else if (item.createdAt !== null) {
                 itemData = new Date(
                   item.createdAt.seconds * 1000
                 ).toDateString();
-              }
+              } else return;
 
               if (correctData !== itemData) {
                 correctData = itemData;
                 return (
                   <>
-                    <ListItem>
-                      <ListItemText>
-                        {new Date(item.createdAt.seconds * 1000).toDateString()}
-                      </ListItemText>
-                    </ListItem>
-                    <ListItem>
+                    <StyledListItemDate>
+                      <ListItemText>{itemData}</ListItemText>
+                    </StyledListItemDate>
+                    <StyledListItemExpenses>
                       <ListItemText>{item.types}</ListItemText>
                       <ListItemText>{item.cost} zł</ListItemText>
                       <ListItemButton>
                         <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
                       </ListItemButton>
-                    </ListItem>
+                    </StyledListItemExpenses>
                   </>
                 );
               }
               return (
-                <ListItem key={item.id}>
+                <StyledListItemExpenses key={item.id}>
                   <ListItemText>{item.types}</ListItemText>
                   <ListItemText>{item.cost} zł</ListItemText>
                   <ListItemButton>
                     <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
                   </ListItemButton>
-                </ListItem>
+                </StyledListItemExpenses>
               );
             })}
           </List>
