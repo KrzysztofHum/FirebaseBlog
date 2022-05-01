@@ -25,10 +25,20 @@ type ICosts = {
 
 const StyledListItemDate = styled(ListItem)`
   border-top: solid 1px #a9a9a9;
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
 `;
 const StyledListItemExpenses = styled(ListItem)`
   border-top: solid 1px #a9a9a9;
+`;
+
+const StyledListItemText = styled(ListItemText)`
+  flex-basis: 100%;
+  text-align: center;
+`;
+
+const StyledListItemButton = styled(ListItemButton)`
+  flex-basis: 100%;
+  text-align: center;
 `;
 
 const ListOfExpenses = ({ currentView }: any) => {
@@ -108,22 +118,22 @@ const ListOfExpenses = ({ currentView }: any) => {
                       <ListItemText>{itemData}</ListItemText>
                     </StyledListItemDate>
                     <StyledListItemExpenses>
-                      <ListItemText>{item.types}</ListItemText>
-                      <ListItemText>{item.cost} zł</ListItemText>
-                      <ListItemButton>
+                      <StyledListItemText>{item.types}</StyledListItemText>
+                      <StyledListItemText>{item.cost} zł</StyledListItemText>
+                      <StyledListItemButton>
                         <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
-                      </ListItemButton>
+                      </StyledListItemButton>
                     </StyledListItemExpenses>
                   </>
                 );
               }
               return (
                 <StyledListItemExpenses key={item.id}>
-                  <ListItemText>{item.types}</ListItemText>
-                  <ListItemText>{item.cost} zł</ListItemText>
-                  <ListItemButton>
+                  <StyledListItemText>{item.types}</StyledListItemText>
+                  <StyledListItemText>{item.cost} zł</StyledListItemText>
+                  <StyledListItemButton>
                     <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
-                  </ListItemButton>
+                  </StyledListItemButton>
                 </StyledListItemExpenses>
               );
             })}
