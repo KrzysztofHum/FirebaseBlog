@@ -60,31 +60,57 @@ const ListOfExpenses = ({ currentView }: any) => {
   const correctCosts = costs
     .filter(
       (todo: any) =>
-        todo.createdAt !== null &&
-        new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
-        new Date(todo.createdAt.seconds * 1000).getMonth() === month
+        todo.createdAt === null ||
+        (new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
+          new Date(todo.createdAt.seconds * 1000).getMonth() === month)
     )
     .sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
+  console.log(correctCosts);
+
   if (currentView === "Categories") {
     return <CategoriesList />;
   }
   if (currentView === "Transactions") {
+    let correctData = "";
     return (
       <>
         <Typography>List of Transactions ({totalCost} zł)</Typography>
         <Box>
           <List>
             {correctCosts.map((item: ICosts) => {
-              console.log(correctCosts);
+              let itemData = "";
+
+              if (item.createdAt === null) {
+                itemData = new Date().toDateString();
+              } else {
+                itemData = new Date(
+                  item.createdAt.seconds * 1000
+                ).toDateString();
+              }
+
+              if (correctData !== itemData) {
+                correctData = itemData;
+                return (
+                  <>
+                    <ListItem>
+                      <ListItemText>
+                        {new Date(item.createdAt.seconds * 1000).toDateString()}
+                      </ListItemText>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText>{item.types}</ListItemText>
+                      <ListItemText>{item.cost} zł</ListItemText>
+                      <ListItemButton>
+                        <DeleteIcon onClick={() => handleDeleteCost(item.id)} />
+                      </ListItemButton>
+                    </ListItem>
+                  </>
+                );
+              }
               return (
                 <ListItem key={item.id}>
-                  <ListItemText>
-                    {item.createdAt === null
-                      ? new Date().toDateString()
-                      : new Date(item.createdAt.seconds * 1000).toDateString()}
-                  </ListItemText>
                   <ListItemText>{item.types}</ListItemText>
                   <ListItemText>{item.cost} zł</ListItemText>
                   <ListItemButton>

@@ -69,6 +69,7 @@ const ExpenseCost = () => {
         snapshot.docs.forEach((doc) => {
           costs.push({ ...doc.data(), id: doc.id });
         });
+        console.log(costs);
         setCosts(costs);
       })
       .catch((err) => {

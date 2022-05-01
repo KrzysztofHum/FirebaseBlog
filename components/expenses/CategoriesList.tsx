@@ -46,6 +46,7 @@ const StyledListItemIcon = styled(ListItemIcon)`
   min-width: 40px;
 `;
 const CategoriesList = () => {
+
   const { costs } = useExpenses();
   const result = costs.reduce((acc, { types, cost }) => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
