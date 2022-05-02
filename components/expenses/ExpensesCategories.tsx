@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
@@ -13,44 +13,9 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  SwipeableDrawer,
 } from "@mui/material";
 import styled from "styled-components";
 import { useExpenses } from "../../context/ExpensesProvider";
-
-// const expensesTypes = [
-//   {
-//     label: "foodstuffs",
-//     icon: <ShoppingBasketIcon color="primary" />,
-//     price: "0 zł",
-//   },
-//   {
-//     label: "restaurant",
-//     icon: <RestaurantIcon color="primary" />,
-//     price: "10 zł",
-//   },
-//   {
-//     label: "transport",
-//     icon: <DirectionsBusIcon color="primary" />,
-//     price: "5 zł",
-//   },
-//   {
-//     label: "health",
-//     icon: <HealthAndSafetyIcon color="primary" />,
-//     price: "3 zł",
-//   },
-//   {
-//     label: "trips",
-//     icon: <FlightIcon color="primary" />,
-//     price: "33 zł",
-//   },
-//   {
-//     label: "another",
-//     icon: <AbcIcon color="primary" />,
-//     price: "44 zł",
-//   },
-// ];
-
 
 const StyledGrid = styled(Grid)`
   min-height: 50vh;
@@ -68,13 +33,33 @@ const StyledListItem = styled(ListItemButton)`
 `;
 
 const ExpensesCategories = () => {
-  const { typesDrower, setTypesDrower, setTypes, setCostDrower, costs } =
-    useExpenses();
+  const {
+    typesDrower,
+    setTypesDrower,
+    setTypes,
+    setCostDrower,
+    costs,
+    selectedDate,
+  } = useExpenses();
 
-  const result = costs.reduce((acc, { types, cost }) => {
+  const month = selectedDate.getMonth();
+  const year = selectedDate.getFullYear();
+  const correctCosts = costs
+    .filter(
+      (todo: any) =>
+        (todo.createdAt === null && new Date().getMonth() === month) ||
+        (new Date(todo.createdAt?.seconds * 1000).getFullYear() === year &&
+          new Date(todo.createdAt?.seconds * 1000).getMonth() === month)
+    )
+    .sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
+
+  const result = correctCosts.reduce((acc, { types, cost }) => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
     return acc;
   }, {});
+  console.log(result.foodstuffs);
 
   const toggleSelectionType = (type: any) => () => {
     setTypesDrower(false);
@@ -100,17 +85,6 @@ const ExpensesCategories = () => {
           </Grid>
           <Grid>
             <StyledList>
-              {/* {expensesTypes.map(({ label, icon, price }: any) => (
-                <StyledListItem
-                  title={label}
-                  key={label}
-                  onClick={toggleSelectionType(label)}
-                >
-                  <ListItemText>{label}</ListItemText>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{price}</ListItemText>
-                </StyledListItem>
-              ))} */}
               <StyledListItem
                 title="foodstuffs"
                 onClick={toggleSelectionType("foodstuffs")}

@@ -45,9 +45,6 @@ const ListOfExpenses = ({ currentView }: any) => {
   const { costs, setCosts, selectedDate } = useExpenses();
   const { user } = useUser();
   const uid = user?.uid;
-  let totalCost = costs.reduce(function (acc, item) {
-    return acc + item.cost;
-  }, 0);
 
   useEffect(() => {
     if (!user?.uid) {
@@ -77,16 +74,19 @@ const ListOfExpenses = ({ currentView }: any) => {
   const correctCosts = costs
     .filter(
       (todo: any) =>
-        todo.createdAt === null ||
-        (new Date(todo.createdAt.seconds * 1000).getFullYear() === year &&
-          new Date(todo.createdAt.seconds * 1000).getMonth() === month)
+        (todo.createdAt === null && new Date().getMonth() === month) ||
+        (new Date(todo.createdAt?.seconds * 1000).getFullYear() === year &&
+          new Date(todo.createdAt?.seconds * 1000).getMonth() === month)
     )
     .sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
+  let totalCost = correctCosts.reduce(function (acc, item) {
+    return acc + item.cost;
+  }, 0);
 
   if (currentView === "Categories") {
-    return <CategoriesList />;
+    return <CategoriesList correctCosts={correctCosts} />;
   }
   if (currentView === "Transactions") {
     let correctData = "";

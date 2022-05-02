@@ -12,7 +12,6 @@ import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import AbcIcon from "@mui/icons-material/Abc";
 import FlightIcon from "@mui/icons-material/Flight";
-import { useExpenses } from "../../context/ExpensesProvider";
 
 const StyledContainer = styled.div`
   display: grid;
@@ -45,14 +44,12 @@ const StyledListItemIcon = styled(ListItemIcon)`
   min-height: 40px;
   min-width: 40px;
 `;
-const CategoriesList = () => {
-
-  const { costs } = useExpenses();
-  const result = costs.reduce((acc, { types, cost }) => {
+const CategoriesList = ({ correctCosts }: any[]) => {
+  const result = correctCosts.reduce((acc, { types, cost }) => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
     return acc;
   }, {});
-  let totalCost = costs.reduce(function (acc, item) {
+  let totalCost = correctCosts.reduce(function (acc, item) {
     return acc + item.cost;
   }, 0);
 
