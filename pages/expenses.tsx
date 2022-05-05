@@ -44,6 +44,11 @@ const StyledListItemBtn = styled(ListItemButton)`
   flex-direction: column;
 `;
 
+const StyledListItems = styled(Grid)`
+  overflow: auto;
+  max-height: calc(100vh - 272px);
+`;
+
 const Expenses = () => {
   const [currentView, setCurrentView] = useState("Categories");
 
@@ -78,9 +83,9 @@ const Expenses = () => {
       <Grid item>
         <Typography align="center">My Expenses</Typography>
       </Grid>
-      <Grid item>
+      <StyledListItems item>
         <ListOfExpenses currentView={currentView}></ListOfExpenses>
-      </Grid>
+      </StyledListItems>
       <StyledAddCostGrid item>
         <AddCost />
       </StyledAddCostGrid>

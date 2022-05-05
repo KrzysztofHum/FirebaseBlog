@@ -12,7 +12,10 @@ import "../styles/styles.css";
 
 const StyledMain = styled.main`
   min-height: calc(100vh - 180px);
+  max-height: calc(100vh - 180px);
   position: relative;
+  /* overflow: auto; */
+  /* overflow: hidden; */
 `;
 
 const providers = [UserProvider, ExpensesProvider].reverse();

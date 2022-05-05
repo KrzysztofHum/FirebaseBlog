@@ -6,8 +6,8 @@ import { useExpenses } from "../../context/ExpensesProvider";
 import styled from "styled-components";
 
 const StyledButton = styled(IconButton)`
-  bottom: 100px;
-  right: 70px;
+  bottom: 50px;
+  right: 50px;
   position: absolute;
   border-radius: 100px;
   width: 45px;

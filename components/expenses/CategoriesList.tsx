@@ -12,11 +12,12 @@ import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import AbcIcon from "@mui/icons-material/Abc";
 import FlightIcon from "@mui/icons-material/Flight";
+// import AddCost from "./AddCost";
 
 const StyledContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   justify-items: stretch;
 `;
 
@@ -44,6 +45,11 @@ const StyledListItemIcon = styled(ListItemIcon)`
   min-height: 40px;
   min-width: 40px;
 `;
+// const StyledAddCostGrid = styled(Grid)`
+//   justify-content: center;
+//   display: flex;
+// `;
+
 const CategoriesList = ({ correctCosts }: any[]) => {
   const result = correctCosts.reduce((acc, { types, cost }) => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
@@ -54,68 +60,73 @@ const CategoriesList = ({ correctCosts }: any[]) => {
   }, 0);
 
   return (
-    <StyledContainer>
-      <StyledListItem title="foodstuffs">
-        <ListItemText>foodstuffs</ListItemText>
-        <StyledListItemIcon>
-          <ShoppingBasketIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.foodstuffs || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="restaurant">
-        <ListItemText>restaurant</ListItemText>
-        <StyledListItemIcon>
-          <RestaurantIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.restaurant || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="transport">
-        <ListItemText>transport</ListItemText>
-        <StyledListItemIcon>
-          <DirectionsBusIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.transport || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="health">
-        <ListItemText>health</ListItemText>
-        <StyledListItemIcon>
-          <HealthAndSafetyIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.health || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="trips">
-        <ListItemText>trips</ListItemText>
-        <StyledListItemIcon>
-          <FlightIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.trips || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledCostGrid>
-        <Grid>Expenses</Grid>
-        <Grid color="red">{totalCost || 0} $</Grid>
-      </StyledCostGrid>
-      <StyledListItem title="another">
-        <ListItemText>another</ListItemText>
-        <StyledListItemIcon>
-          <AbcIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.another || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="another">
-        <ListItemText>another</ListItemText>
-        <StyledListItemIcon>
-          <AbcIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.another || 0} $</ListItemText>
-      </StyledListItem>
-      <StyledListItem title="another">
-        <ListItemText>another</ListItemText>
-        <StyledListItemIcon>
-          <AbcIcon color="disabled" />
-        </StyledListItemIcon>
-        <ListItemText>{result.another || 0} $</ListItemText>
-      </StyledListItem>
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <StyledListItem title="foodstuffs">
+          <ListItemText>foodstuffs</ListItemText>
+          <StyledListItemIcon>
+            <ShoppingBasketIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.foodstuffs || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="restaurant">
+          <ListItemText>restaurant</ListItemText>
+          <StyledListItemIcon>
+            <RestaurantIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.restaurant || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="transport">
+          <ListItemText>transport</ListItemText>
+          <StyledListItemIcon>
+            <DirectionsBusIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.transport || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="health">
+          <ListItemText>health</ListItemText>
+          <StyledListItemIcon>
+            <HealthAndSafetyIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.health || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="trips">
+          <ListItemText>trips</ListItemText>
+          <StyledListItemIcon>
+            <FlightIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.trips || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledCostGrid>
+          <Grid>Expenses</Grid>
+          <Grid color="red">{totalCost || 0} $</Grid>
+        </StyledCostGrid>
+        <StyledListItem title="another">
+          <ListItemText>another</ListItemText>
+          <StyledListItemIcon>
+            <AbcIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.another || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="another">
+          <ListItemText>another</ListItemText>
+          <StyledListItemIcon>
+            <AbcIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.another || 0} $</ListItemText>
+        </StyledListItem>
+        <StyledListItem title="another">
+          <ListItemText>another</ListItemText>
+          <StyledListItemIcon>
+            <AbcIcon color="disabled" />
+          </StyledListItemIcon>
+          <ListItemText>{result.another || 0} $</ListItemText>
+        </StyledListItem>
+      </StyledContainer>
+      {/* <StyledAddCostGrid item>
+        <AddCost />
+      </StyledAddCostGrid> */}
+    </>
   );
 };
 
