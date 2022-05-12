@@ -50,7 +50,7 @@ const ListOfExpenses = ({ currentView }: any) => {
     if (!user?.uid) {
       return;
     }
-    const costsRef = query(collection(db, "costs"), where("uid", "==", uid));
+    const costsRef = query(collection(db, "expenses"), where("uid", "==", uid));
     getDocs(costsRef)
       .then((snapshot) => {
         let costs: any = [];
@@ -71,12 +71,21 @@ const ListOfExpenses = ({ currentView }: any) => {
 
   const month = selectedDate.getMonth();
   const year = selectedDate.getFullYear();
+  // const correctCosts = costs
+  //   .filter(
+  //     (todo: any) =>
+  //       (todo.createdAt === null && new Date().getMonth() === month) ||
+  //       (new Date(todo.createdAt?.seconds * 1000).getFullYear() === year &&
+  //         new Date(todo.createdAt?.seconds * 1000).getMonth() === month)
+  //   )
+  //   .sort((a, b) => {
+  //     return b.createdAt - a.createdAt;
+  //   });
   const correctCosts = costs
     .filter(
       (todo: any) =>
-        (todo.createdAt === null && new Date().getMonth() === month) ||
-        (new Date(todo.createdAt?.seconds * 1000).getFullYear() === year &&
-          new Date(todo.createdAt?.seconds * 1000).getMonth() === month)
+        new Date(todo.createdAt).getFullYear() === year &&
+        new Date(todo.createdAt).getMonth() === month
     )
     .sort((a, b) => {
       return b.createdAt - a.createdAt;
@@ -98,17 +107,19 @@ const ListOfExpenses = ({ currentView }: any) => {
             {correctCosts.map((item: ICosts) => {
               let itemData = "";
 
-              if (
-                item.createdAt === null &&
-                new Date().getMonth() === month &&
-                new Date().getFullYear === year
-              ) {
-                itemData = new Date().toDateString();
-              } else if (item.createdAt !== null) {
-                itemData = new Date(
-                  item.createdAt.seconds * 1000
-                ).toDateString();
-              } else return;
+              // if (
+              //   item.createdAt === null &&
+              //   new Date().getMonth() === month &&
+              //   new Date().getFullYear === year
+              // ) {
+              //   itemData = new Date().toDateString();
+              // } else if (item.createdAt !== null) {
+              //   itemData = new Date(
+              //     item.createdAt.seconds * 1000
+              //   ).toDateString();
+              // } else return;
+
+              itemData = new Date(item.createdAt).toDateString();
 
               if (correctData !== itemData) {
                 correctData = itemData;
@@ -154,7 +165,7 @@ const ListOfExpenses = ({ currentView }: any) => {
                 <ListItemText>
                   {item.createdAt === null
                     ? new Date().toDateString()
-                    : new Date(item.createdAt.seconds * 1000).toDateString()}
+                    : new Date(item.createdAt).toDateString()}
                 </ListItemText>
                 <ListItemText>{item.types}</ListItemText>
                 <ListItemText>{item.cost} zł</ListItemText>

@@ -19,15 +19,16 @@ export const addCost = ({ types, costNumber, uid }: AddCostProps) => {
     cost: costNumber,
     types,
     uid,
-    createdAt: serverTimestamp(),
+    createdAt: Date.now(),
+    // createdAt: new Date(2022, 5, 10, 14, 39, 5),
   };
   // const docRef = doc(db, "costs", "id");
-  const newCostRef = doc(collection(db, "costs"));
+  const newCostRef = doc(collection(db, "expenses"));
   setDoc(newCostRef, data);
 };
 
 export const fetchCosts = () => {
-  const costsRef = collection(db, "costs");
+  const costsRef = collection(db, "expenses");
   getDocs(costsRef)
     .then((snapshot) => {
       let costs: any = [];
@@ -42,7 +43,7 @@ export const fetchCosts = () => {
 };
 
 export const deleteCosts = (id) => {
-  // const costsRef = collection(db, "costs", id);
+  // const costsRef = collection(db, "expenses", id);
   // deleteDoc(costsRef);
-  deleteDoc(doc(db, "costs", id));
+  deleteDoc(doc(db, "expenses", id));
 };

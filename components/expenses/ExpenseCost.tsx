@@ -62,7 +62,7 @@ const ExpenseCost = () => {
     addCost({ types, costNumber, uid });
     setCost("");
     setCostDrower(false);
-    const costsRef = query(collection(db, "costs"), where("uid", "==", uid));
+    const costsRef = query(collection(db, "expenses"), where("uid", "==", uid));
     getDocs(costsRef)
       .then((snapshot) => {
         let costs: any = [];

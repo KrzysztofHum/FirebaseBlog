@@ -47,9 +47,8 @@ const ExpensesCategories = () => {
   const correctCosts = costs
     .filter(
       (todo: any) =>
-        (todo.createdAt === null && new Date().getMonth() === month) ||
-        (new Date(todo.createdAt?.seconds * 1000).getFullYear() === year &&
-          new Date(todo.createdAt?.seconds * 1000).getMonth() === month)
+        new Date(todo.createdAt).getFullYear() === year &&
+        new Date(todo.createdAt).getMonth() === month
     )
     .sort((a, b) => {
       return b.createdAt - a.createdAt;
@@ -59,7 +58,6 @@ const ExpensesCategories = () => {
     !acc[types] ? (acc[types] = cost) : (acc[types] += cost);
     return acc;
   }, {});
-  console.log(result.foodstuffs);
 
   const toggleSelectionType = (type: any) => () => {
     setTypesDrower(false);
