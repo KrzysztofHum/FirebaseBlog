@@ -39,7 +39,10 @@ const StyledListItem = styled(ListItemButton)`
   flex-direction: column;
 `;
 
-const StyledListItemIcon = styled(ListItemIcon)`
+const StyledListItemIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #3eb489;
   border-radius: 50%;
   min-height: 40px;

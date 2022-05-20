@@ -2,7 +2,6 @@ import {
   collection,
   doc,
   setDoc,
-  serverTimestamp,
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
@@ -20,9 +19,7 @@ export const addCost = ({ types, costNumber, uid }: AddCostProps) => {
     types,
     uid,
     createdAt: Date.now(),
-    // createdAt: new Date(2022, 5, 10, 14, 39, 5),
   };
-  // const docRef = doc(db, "costs", "id");
   const newCostRef = doc(collection(db, "expenses"));
   setDoc(newCostRef, data);
 };
@@ -43,7 +40,5 @@ export const fetchCosts = () => {
 };
 
 export const deleteCosts = (id) => {
-  // const costsRef = collection(db, "expenses", id);
-  // deleteDoc(costsRef);
   deleteDoc(doc(db, "expenses", id));
 };
