@@ -43,10 +43,33 @@ const StyledCategory = styled.div`
   margin: 0;
 `;
 
-const StyledScore = styled.div`
+const StyledExpensesScore = styled.div`
   text-align: right;
   color: red;
   margin: 0;
+`;
+
+const StyledInvestmentsScore = styled.div`
+  text-align: right;
+  color: #3eb489;
+  margin: 0;
+`;
+
+const StyledCircle = styled.div`
+  background: #3eb489;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledWhiteCircle = styled.div`
+  background: white;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
 `;
 
 const Home: NextPage = () => {
@@ -57,15 +80,17 @@ const Home: NextPage = () => {
       <StyledSummaryContainer>
         <StyledDataRange>Today</StyledDataRange>
         <StyledBox>
-          <div>Diagram</div>
+          <StyledCircle>
+            <StyledWhiteCircle />
+          </StyledCircle>
           <StyledContent>
             <StyledMain>
               <StyledCategory>Expenses:</StyledCategory>
-              <StyledScore>66,00zł</StyledScore>
+              <StyledExpensesScore>66,00zł</StyledExpensesScore>
             </StyledMain>
             <StyledMain>
               <StyledCategory>Investments:</StyledCategory>
-              <StyledScore>55,00zł</StyledScore>
+              <StyledInvestmentsScore>55,00zł</StyledInvestmentsScore>
             </StyledMain>
           </StyledContent>
         </StyledBox>
@@ -73,15 +98,17 @@ const Home: NextPage = () => {
       <StyledSummaryContainer>
         <StyledDataRange>Last 7 days</StyledDataRange>
         <StyledBox>
-          <div>Diagram</div>
+          <StyledCircle>
+            <StyledWhiteCircle />
+          </StyledCircle>
           <StyledContent>
             <StyledMain>
               <StyledCategory>Expenses:</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledExpensesScore>66$</StyledExpensesScore>
             </StyledMain>
             <StyledMain>
               <StyledCategory>Investments:</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
             </StyledMain>
           </StyledContent>
         </StyledBox>
@@ -89,15 +116,17 @@ const Home: NextPage = () => {
       <StyledSummaryContainer>
         <StyledDataRange>May 2022</StyledDataRange>
         <StyledBox>
-          <div>Diagram</div>
+          <StyledCircle>
+            <StyledWhiteCircle />
+          </StyledCircle>
           <StyledContent>
             <StyledMain>
               <StyledCategory>Expenses:</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledExpensesScore>66$</StyledExpensesScore>
             </StyledMain>
             <StyledMain>
               <StyledCategory>Investments:</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
             </StyledMain>
           </StyledContent>
         </StyledBox>
@@ -105,15 +134,17 @@ const Home: NextPage = () => {
       <div>
         <StyledDataRange>2022</StyledDataRange>
         <StyledBox>
-          <div>Diagram:</div>
+          <StyledCircle>
+            <StyledWhiteCircle />
+          </StyledCircle>
           <StyledContent>
             <StyledMain>
               <StyledCategory>Expenses:</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledExpensesScore>66$</StyledExpensesScore>
             </StyledMain>
             <StyledMain>
               <StyledCategory>Investments</StyledCategory>
-              <StyledScore>66$</StyledScore>
+              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
             </StyledMain>
           </StyledContent>
         </StyledBox>
