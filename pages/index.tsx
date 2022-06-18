@@ -1,155 +1,96 @@
 import type { NextPage } from "next";
+// import { collection, getDocs } from "firebase/firestore";
+// import React from "react";
+// import { db } from "../firebase/firebase";
+
+// const traning = () => {
+//   const colRef = collection(db, "traning");
+//   getDocs(colRef)
+//     .then((snapshot) => {
+//       let traning = [];
+//       snapshot.docs.forEach((doc) => {
+//         traning.push({ ...doc.data(), id: doc.id });
+//       });
+//       console.log(traning);
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+//   return <div>xd</div>;
+// };
+
+// export default traning;
+import {
+  Grid,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import styled from "styled-components";
+import AddCost from "../components/expenses/AddCost";
+import ListOfExpenses from "../components/expenses/ListOfExpenses";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CategoryIcon from "@mui/icons-material/Category";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
-const StyledContainer = styled.div`
-  padding: 1rem;
-  margin: 1.5rem 0.5rem 0;
-  border: 1px solid #a9a9a9;
-  border-radius: 10px;
-  box-shadow: 0px 8px 15px -11px rgba(66, 68, 90, 1);
-`;
-
-const StyledSummaryContainer = styled.div`
-  border-bottom: 1px solid #a9a9a9;
-`;
-
-const StyledDataRange = styled.h4`
-  margin-top: 1rem;
-`;
-
-const StyledH1 = styled.h1`
-  text-align: center;
-`;
-
-const StyledBox = styled.div`
+const StyledAddCostGrid = styled(Grid)`
+  justify-content: center;
   display: flex;
-  margin-bottom: 2rem;
 `;
 
-const StyledContent = styled.div`
+const StyledListItemBtn = styled(ListItemButton)`
   display: flex;
   flex-direction: column;
-  width: 65%;
 `;
 
-const StyledMain = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-`;
-
-const StyledCategory = styled.div`
-  text-align: left;
-  margin: 0;
-`;
-
-const StyledExpensesScore = styled.div`
-  text-align: right;
-  color: red;
-  margin: 0;
-`;
-
-const StyledInvestmentsScore = styled.div`
-  text-align: right;
-  color: #3eb489;
-  margin: 0;
-`;
-
-const StyledCircle = styled.div`
-  background: #3eb489;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledWhiteCircle = styled.div`
-  background: white;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+const StyledListItems = styled(Grid)`
+  overflow: auto;
+  max-height: calc(100vh - 272px);
 `;
 
 const Home: NextPage = () => {
-  const xd = 1;
+  const [currentView, setCurrentView] = useState("Categories");
+
   return (
-    <StyledContainer>
-      <StyledH1>Summary</StyledH1>
-      <StyledSummaryContainer>
-        <StyledDataRange>Today</StyledDataRange>
-        <StyledBox>
-          <StyledCircle>
-            <StyledWhiteCircle />
-          </StyledCircle>
-          <StyledContent>
-            <StyledMain>
-              <StyledCategory>Expenses:</StyledCategory>
-              <StyledExpensesScore>66,00zł</StyledExpensesScore>
-            </StyledMain>
-            <StyledMain>
-              <StyledCategory>Investments:</StyledCategory>
-              <StyledInvestmentsScore>55,00zł</StyledInvestmentsScore>
-            </StyledMain>
-          </StyledContent>
-        </StyledBox>
-      </StyledSummaryContainer>
-      <StyledSummaryContainer>
-        <StyledDataRange>Last 7 days</StyledDataRange>
-        <StyledBox>
-          <StyledCircle>
-            <StyledWhiteCircle />
-          </StyledCircle>
-          <StyledContent>
-            <StyledMain>
-              <StyledCategory>Expenses:</StyledCategory>
-              <StyledExpensesScore>66$</StyledExpensesScore>
-            </StyledMain>
-            <StyledMain>
-              <StyledCategory>Investments:</StyledCategory>
-              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
-            </StyledMain>
-          </StyledContent>
-        </StyledBox>
-      </StyledSummaryContainer>
-      <StyledSummaryContainer>
-        <StyledDataRange>May 2022</StyledDataRange>
-        <StyledBox>
-          <StyledCircle>
-            <StyledWhiteCircle />
-          </StyledCircle>
-          <StyledContent>
-            <StyledMain>
-              <StyledCategory>Expenses:</StyledCategory>
-              <StyledExpensesScore>66$</StyledExpensesScore>
-            </StyledMain>
-            <StyledMain>
-              <StyledCategory>Investments:</StyledCategory>
-              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
-            </StyledMain>
-          </StyledContent>
-        </StyledBox>
-      </StyledSummaryContainer>
-      <div>
-        <StyledDataRange>2022</StyledDataRange>
-        <StyledBox>
-          <StyledCircle>
-            <StyledWhiteCircle />
-          </StyledCircle>
-          <StyledContent>
-            <StyledMain>
-              <StyledCategory>Expenses:</StyledCategory>
-              <StyledExpensesScore>66$</StyledExpensesScore>
-            </StyledMain>
-            <StyledMain>
-              <StyledCategory>Investments</StyledCategory>
-              <StyledInvestmentsScore>66$</StyledInvestmentsScore>
-            </StyledMain>
-          </StyledContent>
-        </StyledBox>
-      </div>
-    </StyledContainer>
+    <Grid container direction="column">
+      <Grid container>
+        <Grid item xs={4}>
+          <StyledListItemBtn onClick={() => setCurrentView("Categories")}>
+            <ListItemIcon>
+              <CategoryIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Categories" />
+          </StyledListItemBtn>
+        </Grid>
+        <Grid item xs={4}>
+          <StyledListItemBtn onClick={() => setCurrentView("Transactions")}>
+            <ListItemIcon>
+              <ReceiptIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Transactions" />
+          </StyledListItemBtn>
+        </Grid>
+        <Grid item xs={4}>
+          <StyledListItemBtn onClick={() => setCurrentView("Overview")}>
+            <ListItemIcon>
+              <BarChartIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Overview" />
+          </StyledListItemBtn>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Typography align="center">My Expenses</Typography>
+      </Grid>
+      <StyledListItems item>
+        <ListOfExpenses currentView={currentView}></ListOfExpenses>
+      </StyledListItems>
+      <StyledAddCostGrid item>
+        <AddCost />
+      </StyledAddCostGrid>
+    </Grid>
   );
 };
 
